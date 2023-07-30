@@ -2,15 +2,15 @@
     <div id='Home'>
         <div id='CalMenu'>
             <div class='CalItem' id='Adate'>
-                Adate
+                <p>Adate</p>
             </div>
 
             <div class='CalItem' id='Dates'>
-                Dates
+                <p>Dates</p>
             </div>
 
             <div class='CalItem' id='AnonymousDates'>
-                Anonymous Dates
+                <p>Anonymous Dates</p>
             </div>
         </div>
 
@@ -21,7 +21,7 @@
             </div>
 
             <div class='Widget' id='Notes'>
-                Notes
+                <p>Notes</p>
             </div>
         </div>
     </div>
@@ -51,11 +51,19 @@ export default {
     }
 
     .CalItem {
-        margin-top: 60%;
+        margin-left: 13%;
+        margin-right: 13%;
+        margin-top: 30%;
+        padding-top: 2%;
+        padding-bottom: 2%;
+        background-color: rgba(108, 108, 108, 1);
+        border-radius: 13px;
+        font-size: larger;
     }
 
     .Widget {
-        margin-top: 80%;
+        margin-top: 20%;
+        font-size: larger;
     }
     #Notes {
         text-align: center;
