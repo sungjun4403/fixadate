@@ -79,3 +79,4 @@
   5. weather icon
   6. NavBar icons
   7. difference between cal widget and memo
+  8. default NavBar status
