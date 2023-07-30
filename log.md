@@ -41,5 +41,31 @@
 2023/07/28 ~ 2023/07/28 <br/>
 
 <br/>
-<img width="300" alt="Screenshot 2022-11-08 at 23 25 32" src="https://user-images.githubusercontent.com/96364048/200944150-f6fb21bc-4c2e-4522-a558-53a2c225d2a9.png" >
-- ![KakaoTalk_Photo_2023-07-31-04-37-27](https://github.com/sungjun4403/fixadate/assets/96364048/54dc7e8b-aacd-4ee7-9820-dc7a63e6d539)
+
+<img width="500" alt="" src="https://github.com/sungjun4403/fixadate/assets/96364048/54dc7e8b-aacd-4ee7-9820-dc7a63e6d539">
+<br/>
+
+- 폰으로 찍은 사진 밖에 없네,,, ~~기록을 잘하자 3회 복창~~
+
+* * * *
+
+<h3>3. home 화면, NavBar 구현 1</h3>
+2023/07/30 ~ 2023/07/31 <br/>
+
+<br/>
+
+<img width="500" alt="Screenshot 2023-07-31 at 4 43 25" src="https://github.com/sungjun4403/fixadate/assets/96364048/1bc7e589-e48b-4d11-a066-41552456a187">
+
+<br/>
+
+- 기획 최병진님이 요청하신 디자인
+  
+<br/>
+
+<img width="750" alt="Screenshot 2023-07-31 at 4 43 25" src="https://github.com/sungjun4403/fixadate/assets/96364048/5e81abc8-2bce-4446-b402-449c65596392">
+
+<br/>
+
+- 내가 만든 초안,,, ~~초라한~~
+- 똑.같.다.!
+
