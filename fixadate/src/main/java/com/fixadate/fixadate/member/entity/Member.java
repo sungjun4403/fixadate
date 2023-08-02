@@ -20,7 +20,8 @@ public class Member extends BaseTimeEntity {
     private Long id;
 
     private String name;
-    private Integer birthY;
+    private String nickname;
+    private Integer birth;
     private Boolean gender; //boolean to selection
     private String profession;
     private String signatureColor;
