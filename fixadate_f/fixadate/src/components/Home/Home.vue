@@ -3,18 +3,21 @@
         <div id='CalMenu'>
 
             <router-link to="/adate">
+                <img id="Pin" width="16" src="../../assets/images/Pin.png">
                 <div class='CalItem' id='Adate'>
                     <p>Adate</p>
                 </div>
             </router-link>
 
             <router-link to="/dates">   
+                <img id="Pin1" width="16" src="../../assets/images/Pin.png">
                 <div class='CalItem' id='Dates'>
                     <p>Dates</p>
                 </div>
             </router-link>
 
             <router-link to="/appointment">
+                <img id="Pin1" width="16" src="../../assets/images/Pin.png">
                 <div class='CalItem' id='Appointment'>
                     <p>Appointment</p>
                 </div>
@@ -24,11 +27,11 @@
 
         <div id='Widgets'>
             <div class='Widget' id='AppleCalanderWidget'>
-                AppleCalanderWidget
+                Appl Cal
             </div>
 
             <div class='Widget' id='Notes'>
-                <p>Notes</p>
+                <img width="119" src="../../assets/images/ClipBoard.png">
             </div>
         </div>
     </div>
@@ -46,6 +49,7 @@ export default {
     #Home {
         display: flex;
         font-family: 'Roboto', sans-serif;
+        margin-top: 4%;
         
     }
     #CalMenu {
@@ -56,15 +60,17 @@ export default {
     #Widgets{
         flex: 1;
         width: 50%;
+        text-align: center;
         /* float: right; */
     }
 
     .CalItem {
-        margin-left: 13%;
-        margin-right: 13%;
+        margin-left: 9%;
+        margin-right: 9%;
         
-        padding-top: 2%;
-        padding-bottom: 2%;
+        padding-top: 6%;
+        padding-bottom: 6%;
+
         background-color: rgba(80, 80, 80, 1);
         border-radius: 13px;
         font-size: small;
@@ -87,7 +93,24 @@ export default {
     }
 
     #Notes {
+        margin-top: 30%;
         text-align: center;
     }
+
+    #Pin {
+        margin-bottom: -27px;
+    }
+
+    #Pin1 {
+        margin-bottom: -39px;
+    }
+
+    #AppleCalanderWidget {
+        width: 80%;
+        height: 80%;
+        background-color: gray;
+    }
+
+ 
 </style>
 
