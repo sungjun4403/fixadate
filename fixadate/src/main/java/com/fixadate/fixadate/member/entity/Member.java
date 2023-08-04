@@ -1,9 +1,14 @@
 package com.fixadate.fixadate.member.entity;
 
 import com.fixadate.fixadate.global.entity.BaseTimeEntity;
+import com.fixadate.fixadate.group.entity.Team;
+import com.fixadate.fixadate.member.dto.MemberEditor;
 import jakarta.persistence.*;
 import lombok.*;
 import org.springframework.transaction.annotation.Transactional;
+
+import java.util.ArrayList;
+import java.util.List;
 
 
 @Entity
@@ -25,6 +30,28 @@ public class Member extends BaseTimeEntity {
     private Boolean gender; //boolean to selection
     private String profession;
     private String signatureColor;
+
+
+
+    public MemberEditor.MemberEditorBuilder toEditor() {
+        return MemberEditor.builder()
+                .name(name)
+                .nickname(nickname)
+                .birth(birth)
+                .gender(gender)
+                .profession(profession)
+                .signatureColor(signatureColor);
+    }
+
+    public void edit(MemberEditor memberEditor) {
+        name = memberEditor.getName();
+        nickname = memberEditor.getNickname();
+        birth = memberEditor.getBirth();
+        gender = memberEditor.getGender();
+        profession = memberEditor.getProfession();
+        signatureColor = memberEditor.getSignatureColor();
+
+    }
 
 
 //    private String title;
