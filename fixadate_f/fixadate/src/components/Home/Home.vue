@@ -61,6 +61,7 @@ export default {
         flex: 1;
         width: 50%;
         text-align: center;
+        align-items: center;
         /* float: right; */
     }
 
@@ -78,6 +79,7 @@ export default {
 
     .Widget {        
         font-size: larger;
+        flex: 1;
     }
 
 
@@ -93,12 +95,12 @@ export default {
     }
 
     #Notes {
-        margin-top: 30%;
+        margin-top: 15%;
         text-align: center;
     }
 
     #Pin {
-        margin-bottom: -27px;
+        margin-bottom: -25px;
     }
 
     #Pin1 {
@@ -106,9 +108,14 @@ export default {
     }
 
     #AppleCalanderWidget {
-        width: 80%;
-        height: 80%;
-        background-color: gray;
+        margin-top: 8%;
+        flex: 1;
+        display: inline-block;
+        width: 114px;
+        height: 114px;
+        border-radius: 18px;
+        
+        background-color: rgba(28,28,30,255);
     }
 
  

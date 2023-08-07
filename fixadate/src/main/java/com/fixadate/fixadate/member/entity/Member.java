@@ -43,6 +43,7 @@ public class Member extends BaseTimeEntity {
                 .signatureColor(signatureColor);
     }
 
+
     public void edit(MemberEditor memberEditor) {
         name = memberEditor.getName();
         nickname = memberEditor.getNickname();
