@@ -6,6 +6,9 @@ import jakarta.persistence.*;
 import lombok.*;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.sql.Time;
+import java.util.Date;
+
 @Entity
 @Getter
 @Builder
@@ -25,6 +28,7 @@ public class Adate extends BaseTimeEntity {
     private Boolean ifAllDay;
     private String calColor;
     private Boolean ifMovable;
+
     //private to
     //startsWhen
     //endsWhen

@@ -1,14 +1,14 @@
 package com.fixadate.fixadate.member.entity;
 
 import com.fixadate.fixadate.global.entity.BaseTimeEntity;
-import com.fixadate.fixadate.group.entity.Team;
 import com.fixadate.fixadate.member.dto.MemberEditor;
+import com.fixadate.fixadate.team.entity.Team;
 import jakarta.persistence.*;
 import lombok.*;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.HashSet;
+import java.util.Set;
 
 
 @Entity
@@ -31,8 +31,6 @@ public class Member extends BaseTimeEntity {
     private String profession;
     private String signatureColor;
 
-
-
     public MemberEditor.MemberEditorBuilder toEditor() {
         return MemberEditor.builder()
                 .name(name)
@@ -53,20 +51,5 @@ public class Member extends BaseTimeEntity {
         signatureColor = memberEditor.getSignatureColor();
 
     }
-
-
-//    private String title;
-//    private String notes;
-//    private String location;
-//    private Boolean ifAllDay;
-//    private String calColor;
-//    private Boolean ifMovable;
-//
-//    //private to
-//    //startsWhen
-//    //endsWhen
-//    //alertWhen
-//    //repeatFreq
-//    //guest // contact
 
 }

@@ -1,4 +1,4 @@
-package com.fixadate.fixadate.group.entity;
+package com.fixadate.fixadate.team.entity;
 
 
 import com.fixadate.fixadate.global.entity.BaseTimeEntity;
@@ -7,8 +7,8 @@ import jakarta.persistence.*;
 import lombok.*;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.HashSet;
+import java.util.Set;
 
 @Entity
 @Getter
