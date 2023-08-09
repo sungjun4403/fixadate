@@ -107,6 +107,19 @@
 <br/>
 
 - 일단 이정도... group 구현이 까다로움. group 이름 자체도 지정어라서 좀 애먹었고 team으로 바꿈. Member <-> Team(group)이 Many to Many인데 중간 테이블 승격이 애매함. many to one, one to many로 풀어쓰라고 하는데 필요성을 딱히 못느끼겠음
-- Adate도 일단 entity 구현 정도만 해놓음. 
+- Adate도 일단 entity 구현 정도만 해놓음. team 구현이 끝나야 뭐가 될듯
 
+<br/>
+  
+<img width="800" src="https://github.com/sungjun4403/fixadate/assets/96364048/f1120e61-9295-476d-bf21-ccc24b9cacb6">
 
+- spring-vue axios 통신 성공. Cors 이슈도 해결
+
+<br/>
+
+* * * *
+
+<h3>4. 홈화면 디자인 수정, 백엔드 member, Adate, Team(group) 개발 </h3>
+2023/08/1 ~ 2023/08/9 <br/>
+
+<br/>
