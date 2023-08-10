@@ -46,6 +46,8 @@
 <br/>
 
 - 폰으로 찍은 사진 밖에 없네,,, ~~기록을 잘하자 3회 복창~~
+ 
+<br/>
 
 * * * *
 
@@ -80,3 +82,44 @@
 6. NavBar icons
 7. difference between cal widget and memo
 8. default NavBar status
+
+<br/>
+
+* * * *
+
+<h3>4. 홈화면 디자인 수정, 백엔드 member, Adate, Team(group) 개발 </h3>
+2023/08/1 ~ 2023/08/9 <br/>
+
+<br/>
+
+<img width="400" src="https://github.com/sungjun4403/fixadate/assets/96364048/c4e65f78-1192-4dcb-add0-0169bbc6e67b">
+
+<br/>
+
+- 배치 및 비율 변경
+- fixadate 폰트 설정
+- 아이콘 디자인 및 적용
+
+<br/>
+
+<img width="800" alt="Screenshot 2023-08-03 at 2 12 01" src="https://github.com/sungjun4403/fixadate/assets/96364048/2064f2ce-c860-40c3-b516-20f27106d3a5">
+
+<br/>
+
+- 일단 이정도... group 구현이 까다로움. group 이름 자체도 지정어라서 좀 애먹었고 team으로 바꿈. Member <-> Team(group)이 Many to Many인데 중간 테이블 승격이 애매함. many to one, one to many로 풀어쓰라고 하는데 필요성을 딱히 못느끼겠음
+- Adate도 일단 entity 구현 정도만 해놓음. team 구현이 끝나야 뭐가 될듯
+
+<br/>
+  
+<img width="800" src="https://github.com/sungjun4403/fixadate/assets/96364048/f1120e61-9295-476d-bf21-ccc24b9cacb6">
+
+- spring-vue axios 통신 성공. Cors 이슈도 해결
+
+<br/>
+
+* * * *
+
+<h3>4. 홈화면 디자인 수정, 백엔드 member, Adate, Team(group) 개발 </h3>
+2023/08/1 ~ 2023/08/9 <br/>
+
+<br/>
