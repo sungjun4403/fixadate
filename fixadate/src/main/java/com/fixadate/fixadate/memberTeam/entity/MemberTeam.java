@@ -24,10 +24,12 @@ public class MemberTeam extends BaseTimeEntity {
     @Column(name = "memberTeamId")
     private Long id;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "memberId")
     private Member member;
 
-    @OneToMany(mappedBy = "memberTeam")
-    List<Team> teamList = new ArrayList<>();
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "teamId")
+    private Team team;
+
 }

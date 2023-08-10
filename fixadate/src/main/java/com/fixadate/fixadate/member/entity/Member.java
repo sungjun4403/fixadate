@@ -34,8 +34,8 @@ public class Member extends BaseTimeEntity {
     private String profession;
     private String signatureColor;
 
-    
-    @OneToMany(mappedBy = "member")
+
+    @OneToMany(mappedBy = "member", cascade = CascadeType.ALL, orphanRemoval = true)
     List<MemberTeam> memberTeamList = new ArrayList<>();
 
 

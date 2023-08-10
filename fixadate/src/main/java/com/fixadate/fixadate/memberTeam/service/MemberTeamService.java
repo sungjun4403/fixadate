@@ -23,14 +23,11 @@ public class MemberTeamService {
 
     public void create(Long memberId, Long teamId) {
         Member member = memberRepository.findById(memberId).orElseThrow();
-
         Team team = teamRepository.findById(teamId).orElseThrow();
-        List<Team> teamList = new ArrayList<>();
-        teamList.add(team);
 
         MemberTeam memberTeam = MemberTeam.builder()
                 .member(member)
-                .teamList(teamList)
+                .team(team)
                 .build();
         memberTeamRepository.save(memberTeam);
     }

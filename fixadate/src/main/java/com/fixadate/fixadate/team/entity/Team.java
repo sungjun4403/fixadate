@@ -8,7 +8,9 @@ import jakarta.persistence.*;
 import lombok.*;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 @Entity
@@ -28,8 +30,7 @@ public class Team extends BaseTimeEntity {
     private String groupColor;
     private String description;
 
-    @ManyToOne
-    @JoinColumn(name = "memberTeamId")
-    private MemberTeam memberTeam;
+    @OneToMany(mappedBy = "team", cascade = CascadeType.ALL, orphanRemoval = true)
+    List<MemberTeam> memberTeamList = new ArrayList<>();
 
 }
