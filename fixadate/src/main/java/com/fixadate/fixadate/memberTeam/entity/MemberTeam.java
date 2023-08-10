@@ -1,35 +1,33 @@
-package com.fixadate.fixadate.team.entity;
-
+package com.fixadate.fixadate.memberTeam.entity;
 
 import com.fixadate.fixadate.global.entity.BaseTimeEntity;
 import com.fixadate.fixadate.member.entity.Member;
-import com.fixadate.fixadate.memberTeam.entity.MemberTeam;
+import com.fixadate.fixadate.team.entity.Team;
 import jakarta.persistence.*;
 import lombok.*;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.util.HashSet;
-import java.util.Set;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 @Getter
+@Setter
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor(access = AccessLevel.PUBLIC)
 @Transactional
-public class Team extends BaseTimeEntity {
+public class MemberTeam extends BaseTimeEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "teamId")
+    @Column(name = "memberTeamId")
     private Long id;
 
-    private String name;
-    private String groupColor;
-    private String description;
-
     @ManyToOne
-    @JoinColumn(name = "memberTeamId")
-    private MemberTeam memberTeam;
+    @JoinColumn(name = "memberId")
+    private Member member;
 
+    @OneToMany(mappedBy = "memberTeam")
+    List<Team> teamList = new ArrayList<>();
 }

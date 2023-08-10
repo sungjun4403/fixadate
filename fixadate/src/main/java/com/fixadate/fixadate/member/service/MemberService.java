@@ -7,6 +7,7 @@ import com.fixadate.fixadate.member.dto.MemberEditor;
 import com.fixadate.fixadate.member.dto.MemberResponse;
 import com.fixadate.fixadate.member.entity.Member;
 import com.fixadate.fixadate.member.repository.MemberRepository;
+import com.fixadate.fixadate.memberTeam.entity.MemberTeam;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -20,6 +21,7 @@ public class MemberService {
 
     //CREATE MEMBER
     public void create(MemberCreate memberCreate) {
+
         Member member = Member.builder()
                 .name(memberCreate.getName())
                 .nickname(memberCreate.getNickname())
