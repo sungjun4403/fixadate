@@ -1,5 +1,6 @@
 package com.fixadate.fixadate.member.entity;
 
+import com.fixadate.fixadate.Adate.entity.Adate;
 import com.fixadate.fixadate.global.entity.BaseTimeEntity;
 import com.fixadate.fixadate.member.dto.MemberEditor;
 import com.fixadate.fixadate.memberTeam.entity.MemberTeam;
@@ -33,10 +34,10 @@ public class Member extends BaseTimeEntity {
     private Boolean gender; //boolean to selection
     private String profession;
     private String signatureColor;
-
-
     @OneToMany(mappedBy = "member", cascade = CascadeType.ALL, orphanRemoval = true)
     List<MemberTeam> memberTeamList = new ArrayList<>();
+    @OneToMany(mappedBy = "member", cascade = CascadeType.ALL, orphanRemoval = true)
+    List<Adate> adateList = new ArrayList<>();
 
 
 

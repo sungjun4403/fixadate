@@ -5,18 +5,26 @@
             <input id="groupColor"><br>
             <input id="description"><br>
             <button @click="addGroup();">add group</button>
+            <button @click="LoadAllGroupsByMember();">view group</button>
         </div>
         <div id="GroupList">
-            dsadasdas
         </div>
+            <div v-for="group in groups" :key="group.id">
+                {{ group.name }} <br>
+                {{ group.groupColor }} <br>
+                {{ group.description }} <br>
+            </div>
     </div>
 </template>
 
 <script>
 import axios from 'axios'
+import { ref } from '@vue/reactivity';
 export default {
     setup() {
-        
+        const groups = ref([])
+
+        return { groups }
     },
 
     Mounted() {
@@ -46,11 +54,14 @@ export default {
         },
 
         LoadAllGroupsByMember() {
+            this.groups = []
             axios({
                 url: 'http://localhost:8080/group/1',
                 method: 'get',
             }).then((response) => {
-                document.getElementById("GroupList").value = 'GOUPRROURPORUP'
+                response.data.forEach(element => {
+                    this.groups.push(element)
+                });
             })
         }
     }

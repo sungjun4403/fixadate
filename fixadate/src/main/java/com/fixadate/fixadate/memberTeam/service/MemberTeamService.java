@@ -4,6 +4,7 @@ import com.fixadate.fixadate.member.entity.Member;
 import com.fixadate.fixadate.member.repository.MemberRepository;
 import com.fixadate.fixadate.memberTeam.entity.MemberTeam;
 import com.fixadate.fixadate.memberTeam.repository.MemberTeamRepository;
+import com.fixadate.fixadate.team.dto.TeamResponse;
 import com.fixadate.fixadate.team.entity.Team;
 import com.fixadate.fixadate.team.repository.TeamRepository;
 import lombok.RequiredArgsConstructor;
@@ -31,4 +32,25 @@ public class MemberTeamService {
                 .build();
         memberTeamRepository.save(memberTeam);
     }
+
+    public List<TeamResponse> viewAllByMember(Long memberId) {
+        List<TeamResponse> teamList = new ArrayList<>();
+
+        List<MemberTeam> memberTeamList = memberTeamRepository.findAllByMemberId(memberId);
+
+        memberTeamList.forEach(memberTeam -> {
+            Team team = memberTeam.getTeam();
+            TeamResponse teamResponse = TeamResponse.builder()
+                    .name(team.getName())
+                    .groupColor(team.getGroupColor())
+                    .description(team.getDescription())
+                    .build();
+            teamList.add(teamResponse);
+        });
+
+
+        return teamList;
+    }
 }
+
+
