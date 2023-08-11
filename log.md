@@ -119,7 +119,25 @@
 
 * * * *
 
-<h3>4. 홈화면 디자인 수정, 백엔드 member, Adate, Team(group) 개발 </h3>
+<h3>5. 백엔드 Member, Team, Adate 관계 매핑, vue group 생성 화면 구현</h3>
 2023/08/1 ~ 2023/08/9 <br/>
 
 <br/>
+
+<img width="700" src="https://github.com/sungjun4403/fixadate/assets/96364048/f42f9a99-e2f9-42e0-b994-b321f8ce6c40">
+
+<br/>
+
+- MemberTeam 테이블 구현... many to many, one to many, many to one 다 시도해보고 왜 필요한지 깨닫음...
+- Team CRUD 구현 후 MemberTeamService에 viewAllByMemberId 구현. memberId -> MemberTeam search -> team search
+
+<br/>
+
+<img width="400" src="https://github.com/sungjun4403/fixadate/assets/96364048/01487719-efd2-4c20-909b-37508c6c1db7">
+
+<br/>
+  
+- List<TeamResponse>에 감싸서 v-for로 화면에 띄움 (그냥 List<Team>은 안됐음 이유는 모름... ㅠ)
+- Adate도 Member랑 매핑 해놓음. CRUD는 아직. 로그인 기능도 아직
+
+
