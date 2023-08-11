@@ -34,3 +34,8 @@ server:
     error:
         include-exception: true
         include-message: always
+
+google:
+    client:
+        id: 120890874732-gbu01labf2gh9id7hkauropgeuubjpun.apps.googleusercontent.com
+        pw: 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
