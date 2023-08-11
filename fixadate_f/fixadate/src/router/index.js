@@ -7,6 +7,7 @@ import Preferences from '../components/Preferences/Preferences.vue'
 import AlertCentre from '../components/AlertCentre/AlertCentre.vue'
 import Home from '../components/Home/Home.vue'
 import Login from '../components/Login/Login.vue'
+import AfterLogin from '../components/Login/AfterLogin.vue'
 
 const routes= [
     { path: "/", name: "Home", component: Home },
@@ -15,7 +16,8 @@ const routes= [
     { path: "/appointment", name: "Appointment", component: Appointment},
     { path: "/preferences", name: "Preferences", component: Preferences },
     { path: "/alertcentre", name: "AlertCentre", component: AlertCentre }, 
-    { path: "/login", name: "Login", component: Login }, 
+    { path: "/login", name: "Login", component: Login },
+    { path: "/afterlogin", name: "AfterLogin", component: AfterLogin }, 
 ]
 
 const router = createRouter({

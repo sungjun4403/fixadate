@@ -24,7 +24,7 @@ public class LoginController {
     @RequestMapping(value="/api/v1/oauth2/google", method = RequestMethod.POST)
     public String loginUrlGoogle(){
         String reqUrl = "https://accounts.google.com/o/oauth2/v2/auth?client_id=" + googleClientId
-                + "&redirect_uri=http://localhost:8080/api/v1/oauth2/google&response_type=code&scope=email%20profile%20openid&access_type=offline";
+                + "&redirect_uri=http://localhost:3000/afterlogin&response_type=code&scope=email%20profile%20openid&access_type=offline";
         return reqUrl;
     }
     @RequestMapping(value="/api/v1/oauth2/google", method = RequestMethod.GET)
