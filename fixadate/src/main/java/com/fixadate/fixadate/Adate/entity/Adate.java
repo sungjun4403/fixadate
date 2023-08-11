@@ -31,13 +31,13 @@ public class Adate extends BaseTimeEntity {
     private String calColor;
     private Boolean ifMovable;
     @ManyToOne(fetch = FetchType.LAZY)
-    
     @JoinColumn(name = "memberId")
     private Member member;
+    private Date startsWhen;
+    private Date endsWhen;
+    private Date alertWhen;
+    private String repeatFreq;
+
     //private to
-    //startsWhen
-    //endsWhen
-    //alertWhen
-    //repeatFreq
     //guest // contact
 }
