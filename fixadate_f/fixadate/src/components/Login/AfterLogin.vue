@@ -24,7 +24,7 @@ export default {
             
             console.log(code)
             axios ({
-                url: "http://localhost:8080//api/v1/oauth2/google?" + code,
+                url: "http://localhost:8080/api/v1/oauth2/google?" + code,
                 method: "get"
             }).then((response) => {
                 console.log(response.data)
