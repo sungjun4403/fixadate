@@ -21,10 +21,12 @@ public class LoginController {
     @Value("${google.client.pw}")
     private String googleClientPw;
 
+    private final String redirectUri = "http://localhost:3000/afterlogin";
+
     @RequestMapping(value="/api/v1/oauth2/google", method = RequestMethod.POST)
     public String loginUrlGoogle(){
         String reqUrl = "https://accounts.google.com/o/oauth2/v2/auth?client_id=" + googleClientId
-                + "&redirect_uri=http://localhost:8080/api/v1/oauth2/google&response_type=code&scope=email%20profile%20openid&access_type=offline";
+                + "&redirect_uri=" + redirectUri + "&response_type=code&scope=email%20profile%20openid&access_type=offline";
         return reqUrl;
     }
     @RequestMapping(value="/api/v1/oauth2/google", method = RequestMethod.GET)
@@ -35,7 +37,7 @@ public class LoginController {
                 .clientId(googleClientId)
                 .clientSecret(googleClientPw)
                 .code(authCode)
-                .redirectUri("http://localhost:8080/api/v1/oauth2/google")
+                .redirectUri(redirectUri)
                 .grantType("authorization_code").build();
         ResponseEntity<GoogleResponse> resultEntity = restTemplate.postForEntity("https://oauth2.googleapis.com/token",
                 googleOAuthRequestParam, GoogleResponse.class);

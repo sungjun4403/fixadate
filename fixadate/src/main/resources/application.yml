@@ -37,5 +37,7 @@ server:
 
 google:
     client:
+#        id: 120890874732-3tkosm3v7hnrilbc8gpl9cag6l1vgi27.apps.googleusercontent.com
+#        pw: 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
         id: 120890874732-gbu01labf2gh9id7hkauropgeuubjpun.apps.googleusercontent.com
         pw: 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
