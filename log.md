@@ -120,7 +120,7 @@
 * * * *
 
 <h3>5. 백엔드 Member, Team, Adate 관계 매핑, vue group 생성 화면 구현</h3>
-2023/08/1 ~ 2023/08/9 <br/>
+2023/08/1 ~ 2023/08/10 <br/>
 
 <br/>
 
@@ -140,4 +140,34 @@
 - List<TeamResponse>에 감싸서 v-for로 화면에 띄움 (그냥 List<Team>은 안됐음 이유는 모름... ㅠ)
 - Adate도 Member랑 매핑 해놓음. CRUD는 아직. 로그인 기능도 아직
 
+<br/>
+
+* * * *
+
+<h3>6. google OAuth 로그인 구현</h3>
+2023/08/12 <br/>
+
+<br/>
+
+<img width="400" src="https://github.com/sungjun4403/fixadate/assets/96364048/3e03ccd9-f9dc-4db3-bfff-64d8442c4b72">
+
+- 구글 OAuth 로그인 구현
+- 추출 가능한 정보: 
+iss=https://accounts.google.com, 
+azp=120890874732-gbu01labf2gh9id7hkauropgeuubjpun.apps.googleusercontent.com, aud=120890874732-
+gbu01labf2gh9id7hkauropgeuubjpun.apps.googleusercontent.com, 
+sub=113883840159478232271, 
+email=geulligu89@gmail.com, 
+email_verified=true, 
+at_hash=u8vZTAlqgY7ekxHFBEA6rA, 
+name=이성준, 
+picture=https://lh3.googleusercontent.com/a/AAcHTtfwSwIgsSzYAybeZAKjaHoJFbd_GACpsl2RGJqvWCYj=s96-c,
+given_name=성준,
+family_name=이,
+locale=ko, 
+iat=1691791922, 
+exp=1691795522, 
+alg=RS256, 
+kid=911e39e27928ae9f1e9d1e21646de92d19351b44, 
+typ=JWT
 
