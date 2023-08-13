@@ -183,8 +183,17 @@ typ=JWT
 <br/>
 
  - 구글 로그인 후 url에 주어지는 path variable 'code'를 백으로 보내 유저 정보를 받아오기 위한 페이지인 afterlogin 페이지 개편. 로그인 플랫폼별 afterlogin 페이지 할당. (ex. /googleafterlogin, /naverafterlogin, etc.)
- - 링크로 로그인 플랫폼 판별이 어렵기 때문. 
+ - 링크로 로그인 플랫폼 판별이 어렵기 때문.
+ - 네이버 로그인 화면
+   
+<img width="400" src="https://github.com/sungjun4403/fixadate/assets/96364048/6394e596-e8d7-421f-a44d-0255d64d6945">
 
+
+<br/>
+ 
+ - 네이버 로그인시 추출할 수 있는 유저 정보
+  
+<img width="400" src="https://github.com/sungjun4403/fixadate/assets/96364048/8bb5c379-9c3a-43fe-a2ca-901f147f13a2">
 
 
 
