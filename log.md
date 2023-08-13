@@ -173,3 +173,23 @@ typ=JWT
 
 구글, 카카오, 네이버, 애플 로그인 구현 예정
 
+<br/>
+
+* * * *
+
+<h3>7. naver 로그인 구현</h3>
+2023/08/13 <br/>
+
+<br/>
+
+ - 구글 로그인 후 url에 주어지는 path variable 'code'를 백으로 보내 유저 정보를 받아오기 위한 페이지인 afterlogin 페이지 개편. 로그인 플랫폼별 afterlogin 페이지 할당. (ex. /googleafterlogin, /naverafterlogin, etc.)
+ - 링크로 로그인 플랫폼 판별이 어렵기 때문. 
+
+
+
+
+
+
+
+
+
