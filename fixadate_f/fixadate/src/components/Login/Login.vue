@@ -2,7 +2,12 @@
     <div>
         <button @click="getGoogleLoginUrl()">
             GOOGLE LOGIN
+        </button>
+
+        <button @click="getNaverLoginUrl()">
+            naver login
         </button>        
+           
     </div>
 </template>
 
@@ -20,6 +25,16 @@ export default {
             }).then((response) => {
                 document.location.href = response.data
             })
+        },
+
+        getNaverLoginUrl() {
+            axios({
+                url: "http://localhost:8080/getnaverloginurl",
+                method: "get"
+            }).then((response) => {
+                document.location.href = response.data
+            })
+            
         }
     }
 }

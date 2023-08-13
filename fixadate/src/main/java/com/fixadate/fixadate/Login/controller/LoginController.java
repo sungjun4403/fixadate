@@ -20,13 +20,19 @@ public class LoginController {
     private String googleClientId;
     @Value("${google.client.pw}")
     private String googleClientPw;
+    @Value("${naver.client.id}")
+    private String naverClientId;
+    @Value("${naver.client.pw}")
+    private String getNaverClientPw;
 
-    private final String redirectUri = "http://localhost:3000/afterlogin";
+    private final String googleRedirectUri = "http://localhost:3000/googleafterlogin";
+    private final String naverRedirectUrl = "http://localhost:3000/naverafterlogin";
+
 
     @RequestMapping(value="/api/v1/oauth2/google", method = RequestMethod.POST)
     public String loginUrlGoogle(){
         String reqUrl = "https://accounts.google.com/o/oauth2/v2/auth?client_id=" + googleClientId
-                + "&redirect_uri=" + redirectUri + "&response_type=code&scope=email%20profile%20openid&access_type=offline";
+                + "&redirect_uri=" + googleRedirectUri + "&response_type=code&scope=email%20profile%20openid&access_type=offline";
         return reqUrl;
     }
     @RequestMapping(value="/api/v1/oauth2/google", method = RequestMethod.GET)
@@ -37,7 +43,7 @@ public class LoginController {
                 .clientId(googleClientId)
                 .clientSecret(googleClientPw)
                 .code(authCode)
-                .redirectUri(redirectUri)
+                .redirectUri(googleRedirectUri)
                 .grantType("authorization_code").build();
         ResponseEntity<GoogleResponse> resultEntity = restTemplate.postForEntity("https://oauth2.googleapis.com/token",
                 googleOAuthRequestParam, GoogleResponse.class);
@@ -49,5 +55,12 @@ public class LoginController {
         String email=resultEntity2.getBody().getEmail();
         System.out.println(resultEntity2.getBody());
         return email;
+    }
+
+    @GetMapping("/getnaverloginurl")
+    public String loginUrlNaver() {
+        //https://nid.naver.com/oauth2.0/authorize?response_type=code&client_id=${clientId}&redirect_uri=${redirectUri}
+        String url = "https://nid.naver.com/oauth2.0/authorize?response_type=code&client_id=" + naverClientId + "&redirect_uri=" + naverRedirectUrl;
+        return url;
     }
 }

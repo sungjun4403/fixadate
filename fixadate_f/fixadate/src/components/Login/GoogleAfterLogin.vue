@@ -10,7 +10,6 @@ export default {
     setup() {
         
     },
-
     mounted() {
         this.extractUserInfo()
     },
