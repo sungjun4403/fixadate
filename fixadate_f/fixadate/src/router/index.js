@@ -10,6 +10,7 @@ import Home from '../components/Home/Home.vue'
 import Login from '../components/Login/Login.vue'
 import GoogleAfterLogin from '../components/Login/GoogleAfterLogin.vue'
 import NaverAfterLogin from '../components/Login/NaverAfterLogin.vue'
+import AppleAfterLogin from '../components/Login/AppleAfterLogin.vue'
 
 const routes= [
     { path: "/", name: "Home", component: Home },
@@ -21,7 +22,8 @@ const routes= [
     { path: "/login", name: "Login", component: Login },
     { path: "/googleafterlogin", name: "GoogleAfterLogin", component: GoogleAfterLogin }, 
     { path: "/naverafterlogin", name: "NaverAfterLogin", component: NaverAfterLogin},
-    
+    { path: "/appleafterlogin", name: "AppleAfterLogin", component: AppleAfterLogin}
+
 ]
 
 const router = createRouter({
