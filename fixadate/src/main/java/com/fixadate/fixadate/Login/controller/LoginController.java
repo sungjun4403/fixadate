@@ -24,9 +24,10 @@ public class LoginController {
     private String naverClientId;
     @Value("${naver.client.pw}")
     private String naverClientPw;
-
-    private final String googleRedirectUri = "http://localhost:3000/googleafterlogin";
-    private final String naverRedirectUrl = "http://localhost:3000/naverafterlogin";
+    @Value("${google.client.redirect_uri}")
+    private String googleRedirectUri;
+    @Value("${naver.client.redirect_uri}")
+    private String naverRedirectUrl;
     private final RestTemplate restTemplate = new RestTemplate();
 
     @RequestMapping(value="/api/v1/oauth2/google", method = RequestMethod.POST)
@@ -95,4 +96,10 @@ public class LoginController {
     public String loginUrlKakao() {
         return loginService.loginUrlKakao();
     }
+
+    @PostMapping("/api/kakao/login")
+    public String afterLoginKakao(@RequestParam(value = "code") String authCode) {
+         
+    }
 }
+

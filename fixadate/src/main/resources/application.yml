@@ -41,11 +41,13 @@ google:
 #        pw: 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
         id: 120890874732-gbu01labf2gh9id7hkauropgeuubjpun.apps.googleusercontent.com
         pw: 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
+        redirect_uri: "http://localhost:3000/googleafterlogin"
 
 naver:
     client:
         id: diax5Uwvc73h94XdCnAk
         pw: WnChNRdoJa
+        redirect_uri: "http://localhost:3000/naverafterlogin"
 
 
 kakao:
