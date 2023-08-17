@@ -46,3 +46,10 @@ naver:
     client:
         id: diax5Uwvc73h94XdCnAk
         pw: WnChNRdoJa
+
+
+kakao:
+    client:
+        id: b9e9de17f5e2e7a201fefcccf6138c0f
+#        pw:
+        redirect_uri: "http://localhost:3000/kakaoafterlogin"

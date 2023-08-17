@@ -11,6 +11,7 @@ import Login from '../components/Login/Login.vue'
 import GoogleAfterLogin from '../components/Login/GoogleAfterLogin.vue'
 import NaverAfterLogin from '../components/Login/NaverAfterLogin.vue'
 import AppleAfterLogin from '../components/Login/AppleAfterLogin.vue'
+import KakaoAfterLogin from '../components/Login/KakaoAfterLogin.vue'
 
 const routes= [
     { path: "/", name: "Home", component: Home },
@@ -22,7 +23,8 @@ const routes= [
     { path: "/login", name: "Login", component: Login },
     { path: "/googleafterlogin", name: "GoogleAfterLogin", component: GoogleAfterLogin }, 
     { path: "/naverafterlogin", name: "NaverAfterLogin", component: NaverAfterLogin},
-    { path: "/appleafterlogin", name: "AppleAfterLogin", component: AppleAfterLogin}
+    { path: "/appleafterlogin", name: "AppleAfterLogin", component: AppleAfterLogin},
+    { path: "/kakaoafterlogin", name: "KakaoAfterLogin", component: KakaoAfterLogin},
 
 ]
 

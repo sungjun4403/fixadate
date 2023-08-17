@@ -1,6 +1,7 @@
 package com.fixadate.fixadate.Login.controller;
 
 import com.fixadate.fixadate.Login.dto.*;
+import com.fixadate.fixadate.Login.service.LoginService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.*;
@@ -14,6 +15,7 @@ import java.util.Map;
 @RestController
 @CrossOrigin("*")
 public class LoginController {
+    private final LoginService loginService;
     @Value("${google.client.id}")
     private String googleClientId;
     @Value("${google.client.pw}")
@@ -87,5 +89,10 @@ public class LoginController {
 
         System.out.println(naverInfoResponse.getBody().getResponse());
         return "";
+    }
+
+    @GetMapping("/getkakaologinurl")
+    public String loginUrlKakao() {
+        return loginService.loginUrlKakao();
     }
 }

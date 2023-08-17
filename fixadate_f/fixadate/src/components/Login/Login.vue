@@ -7,6 +7,10 @@
         <button @click="getNaverLoginUrl()">
             naver login
         </button>        
+
+        <button @click="getKakaoLoginUrl()">
+            kakao login
+        </button>
            
     </div>
 </template>
@@ -33,8 +37,16 @@ export default {
                 method: "get"
             }).then((response) => {
                 document.location.href = response.data
-            })
-            
+            })   
+        },
+
+        getKakaoLoginUrl() {
+            axios({
+                url: "http://localhost:8080/getkakaologinurl",
+                method: "get"
+            }).then((response) => {
+                document.location.href = response.data
+            })   
         }
     }
 }
