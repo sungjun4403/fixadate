@@ -99,7 +99,7 @@ public class LoginController {
 
     @PostMapping("/api/kakao/login")
     public String afterLoginKakao(@RequestParam(value = "code") String authCode) {
-         
+         return loginService.kakaoIssueTokens(authCode);
     }
 }
 
