@@ -1,6 +1,8 @@
 package com.fixadate.fixadate.Login.controller;
 
 import com.fixadate.fixadate.Login.dto.*;
+import com.fixadate.fixadate.Login.dto.kakao.KakaoTokenRequest;
+import com.fixadate.fixadate.Login.dto.kakao.KakaoTokenResponse;
 import com.fixadate.fixadate.Login.service.LoginService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Value;
@@ -28,7 +30,10 @@ public class LoginController {
     private String googleRedirectUri;
     @Value("${naver.client.redirect_uri}")
     private String naverRedirectUrl;
-    private final RestTemplate restTemplate = new RestTemplate();
+    @Value("${kakao.client.id}")
+    private String kakaoClientId;
+    @Value("${kakao.client.redirect_uri}")
+    private String kakaoRedirectUri;
 
     @RequestMapping(value="/api/v1/oauth2/google", method = RequestMethod.POST)
     public String afterLoginUrlGoogle(){
@@ -55,6 +60,7 @@ public class LoginController {
                 map, GoogleInfResponse.class);
         String email=resultEntity2.getBody().getEmail();
         System.out.println(resultEntity2.getBody());
+
         return email;
     }
 
@@ -97,7 +103,7 @@ public class LoginController {
         return loginService.loginUrlKakao();
     }
 
-    @PostMapping("/api/kakao/login")
+    @GetMapping("/api/kakao/login")
     public String afterLoginKakao(@RequestParam(value = "code") String authCode) {
          return loginService.kakaoIssueTokens(authCode);
     }

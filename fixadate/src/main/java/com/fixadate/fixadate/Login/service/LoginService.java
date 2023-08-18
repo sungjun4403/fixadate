@@ -5,16 +5,18 @@ import com.fixadate.fixadate.Login.dto.kakao.KakaoTokenRequest;
 import com.fixadate.fixadate.Login.dto.kakao.KakaoTokenResponse;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.http.HttpEntity;
-import org.springframework.http.HttpMethod;
-import org.springframework.http.ResponseEntity;
+import org.springframework.http.*;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.util.LinkedMultiValueMap;
+import org.springframework.util.MultiValueMap;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.client.RestTemplate;
 
 @Service
 @Transactional
 @RequiredArgsConstructor
+@CrossOrigin("*")
 public class LoginService {
     @Value("${kakao.client.id}")
     private String kakaoClientId;
@@ -24,23 +26,23 @@ public class LoginService {
     public String loginUrlKakao() {
         return "https://kauth.kakao.com/oauth/authorize?response_type=code&client_id=" + kakaoClientId + "&redirect_uri=" + kakaoRedirectUri;
     }
-    private final RestTemplate restTemplate = new RestTemplate();
 
     public String kakaoIssueTokens(String authCode) {
-        KakaoTokenRequest kakaoTokenRequest = KakaoTokenRequest.builder()
-                .grant_type("authorization_code")
-                .client_id(kakaoClientId)
-                .redirect_uri(kakaoRedirectUri)
+        RestTemplate restTemplate = new RestTemplate();
+        KakaoTokenRequest kakaoTokenRequestParam = KakaoTokenRequest
+                .builder()
+                .grantType("authorization_code")
+                .clientId(kakaoClientId)
+                .redirectUri(kakaoRedirectUri)
                 .code(authCode)
                 .build();
 
-        HttpEntity httpEntity = new HttpEntity();
-        ResponseEntity<KakaoTokenResponse> kakaoTokenResponse = restTemplate.postForEntity(
-                "https://kauth.kakao.com/oauth/token",
-                kakaoTokenRequest,
-                KakaoTokenResponse.class
-        )
+        HttpEntity<MultiValueMap<String, String>> httpEntity = new HttpEntity<>(kakaoTokenRequestParam); //dto to MultiValueMap
 
+        ResponseEntity<KakaoTokenResponse> kakaoTokenResponse = restTemplate.postForEntity(
+                "https://kauth.kakao.com/oauth/token", httpEntity, KakaoTokenResponse.class);
+
+        System.out.println(kakaoTokenResponse.getBody());
         return "";
     }
 }

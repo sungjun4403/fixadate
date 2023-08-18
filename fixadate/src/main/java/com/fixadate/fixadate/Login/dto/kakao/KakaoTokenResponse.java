@@ -1,5 +1,6 @@
 package com.fixadate.fixadate.Login.dto.kakao;
 
+import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
