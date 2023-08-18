@@ -13,6 +13,8 @@ import org.springframework.util.MultiValueMap;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.client.RestTemplate;
 
+import javax.swing.text.html.parser.Entity;
+
 @Service
 @Transactional
 @RequiredArgsConstructor
@@ -37,7 +39,15 @@ public class LoginService {
                 .code(authCode)
                 .build();
 
-        HttpEntity<MultiValueMap<String, String>> httpEntity = new HttpEntity<>(kakaoTokenRequestParam); //dto to MultiValueMap
+        MultiValueMap<String, String> body = new LinkedMultiValueMap<>();
+        body.add("grant_type", "authorization_code");
+        body.add("client_id", kakaoClientId);
+        body.add("redirect_uri", kakaoRedirectUri);
+        body.add("code", authCode);
+
+        HttpHeaders headers = new HttpHeaders();
+
+        HttpEntity<MultiValueMap<String, String>> httpEntity = new HttpEntity<>(body, headers); //dto to MultiValueMap
 
         ResponseEntity<KakaoTokenResponse> kakaoTokenResponse = restTemplate.postForEntity(
                 "https://kauth.kakao.com/oauth/token", httpEntity, KakaoTokenResponse.class);
@@ -45,4 +55,11 @@ public class LoginService {
         System.out.println(kakaoTokenResponse.getBody());
         return "";
     }
+
+    public String loginUrlApple() {
+
+
+        return "";
+    }
+
 }

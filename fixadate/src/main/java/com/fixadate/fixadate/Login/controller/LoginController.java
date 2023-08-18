@@ -107,5 +107,10 @@ public class LoginController {
     public String afterLoginKakao(@RequestParam(value = "code") String authCode) {
          return loginService.kakaoIssueTokens(authCode);
     }
+
+    @GetMapping("/getappleloginurl")
+    public String loginUrlApple() {
+        return loginService.loginUrlApple();
+    }
 }
 
