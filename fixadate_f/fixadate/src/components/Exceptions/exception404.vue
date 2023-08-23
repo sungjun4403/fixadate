@@ -1,6 +1,8 @@
 <template>
     <div>
-        4040404040404040404040
+        <h2>404! <br> how the fxck did you get here?</h2> <br>
+
+        <a href="/">return to home</a>
     </div>
 </template>
 
