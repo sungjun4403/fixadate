@@ -13,19 +13,30 @@ import NaverAfterLogin from '../components/Login/NaverAfterLogin.vue'
 import AppleAfterLogin from '../components/Login/AppleAfterLogin.vue'
 import KakaoAfterLogin from '../components/Login/KakaoAfterLogin.vue'
 
+import exception404 from '../components/Exceptions/exception404.vue'
+
 const routes= [
+
     { path: "/", name: "Home", component: Home },
+
+    //Menu
     { path: "/adate", name: "Adate", component: Adate },
     { path: "/dates", name: "Dates", component: Dates },
     { path: "/appointment", name: "Appointment", component: Appointment},
     { path: "/preferences", name: "Preferences", component: Preferences },
     { path: "/alertcentre", name: "AlertCentre", component: AlertCentre }, 
+
+    //Login 
     { path: "/login", name: "Login", component: Login },
     { path: "/googleafterlogin", name: "GoogleAfterLogin", component: GoogleAfterLogin }, 
     { path: "/naverafterlogin", name: "NaverAfterLogin", component: NaverAfterLogin},
     { path: "/appleafterlogin", name: "AppleAfterLogin", component: AppleAfterLogin},
     { path: "/kakaoafterlogin", name: "KakaoAfterLogin", component: KakaoAfterLogin},
 
+    //Exceptions
+    { path: "/404", name: "exception404", component: exception404},
+    { path: "/:pathMatch(.*)*", redirect: '/404'},
+    
 ]
 
 const router = createRouter({
