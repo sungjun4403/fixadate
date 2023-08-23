@@ -208,7 +208,7 @@ typ=JWT
 
 * * * *
 
-<h3>9. trubleshooting& exception handling</h3>
+<h3>9. trubleshooting& exception handling, login controller, login service refactoring</h3>
 2023/08/23 ~ <br/>
 
 <br/>
