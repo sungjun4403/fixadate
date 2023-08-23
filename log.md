@@ -195,10 +195,25 @@ typ=JWT
   
 <img width="400" src="https://github.com/sungjun4403/fixadate/assets/96364048/8bb5c379-9c3a-43fe-a2ca-901f147f13a2">
 
+* * * *
 
+<h3>8. kakao 로그인 구현 및 trubleshooting</h3>
+2023/08/15 ~ 2023/08/22<br/>
 
+<br/>
 
+ - kakao 로그인 구현 완료. 근데 restTemplate 송신 과정에서 dto to multiValueMap conversion이 원활하지 못했음. 이유 미상. google과 정확히 똑같이도 구현해보았으나 httpEntity로 포장해서 보내지 않으면 body로 실리지가 않았음 (no body 어쩌구 오류 발생)
+ - 개발 번외로 kakao 로그인시 추출할 수 있는 유저 정보는 상당히 제한적인 편이였음. 정확하게는 추출 과정이 제한적. 구글 같은 경우는 유저 정보 수집을 안해서, 줄 정보가 없어서 제공을 못받았다면, kakao는 민감한 정보를 너무 많이 가지고 있어서 제한적으로 제공하는 느낌. (birth보다 연령대 사용을 권장하는 것부터가 개인정보에 민감해보임) 로그인 후 정보제공 동의 화면에서도 배포 후 심사를 받아야만 필수 제공을 받을 수 있음. 선택 제공 받을 때에도 각 항목에 정보 사용 목적을 서술해야 했음. 네이버는 카카오에 비하면 적당히 중도.
+ - 진짜 문제는 apple 로그인 구현. 다행히도 (apple스럽지 않게) 여타 Oauth 2.0과 같은 로그인 프로토콜을 사용하지만 문제는 연 $99의 apple developer program에 등록해야만 apple의 api가 사용 가능하다는 것. 로그인 기능 외에도 캘린더 일정 불러오기 기능도 위 프로그램 가입이 필수.
 
+* * * *
+
+<h3>9. trubleshooting& exception handling</h3>
+2023/08/23 ~ <br/>
+
+<br/>
+
+- vue 404 handling
 
 
 
