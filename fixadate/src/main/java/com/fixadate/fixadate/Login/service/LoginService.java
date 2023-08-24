@@ -1,7 +1,7 @@
 package com.fixadate.fixadate.Login.service;
 
 
-import com.fixadate.fixadate.Login.dto.NaverTokenResponse;
+import com.fixadate.fixadate.Login.dto.*;
 import com.fixadate.fixadate.Login.dto.kakao.KakaoTokenRequest;
 import com.fixadate.fixadate.Login.dto.kakao.KakaoTokenResponse;
 import lombok.RequiredArgsConstructor;
@@ -15,6 +15,8 @@ import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.client.RestTemplate;
 
 import javax.swing.text.html.parser.Entity;
+import java.util.HashMap;
+import java.util.Map;
 
 @Service
 @Transactional
@@ -38,6 +40,7 @@ public class LoginService {
     @Value("${kakao.client.redirect_uri}")
     private String kakaoRedirectUri;
 
+    RestTemplate restTemplate = new RestTemplate();
 
     // ==============getloginurl methods==============
     public String loginUrlGoogle() {
@@ -64,8 +67,33 @@ public class LoginService {
 
 
     // ==============get tokens methods==============
-    public String kakaoIssueTokens(String authCode) {
+    public GoogleResponse googleIssueTokens(String authCode) {
+        GoogleRequest googleOAuthRequestParam = GoogleRequest
+                .builder()
+                .clientId(googleClientId)
+                .clientSecret(googleClientPw)
+                .code(authCode)
+                .redirectUri(googleRedirectUri)
+                .grantType("authorization_code").build();
+        ResponseEntity<GoogleResponse> resultEntity = restTemplate.postForEntity("https://oauth2.googleapis.com/token",
+                googleOAuthRequestParam, GoogleResponse.class);
+        return  resultEntity.getBody();
+    }
+
+    public NaverTokenResponse naverIssueTokens(String authCode) {
         RestTemplate restTemplate = new RestTemplate();
+
+        String url = "https://nid.naver.com/oauth2.0/token?grant_type=authorization_code&client_id=" + naverClientId
+                + "&client_secret=" + naverClientPw
+                + "&code=" + authCode;
+
+        ResponseEntity<NaverTokenResponse> naverTokenResponse = restTemplate.getForEntity(url, NaverTokenResponse.class);
+        return naverTokenResponse.getBody();
+    }
+
+    public KakaoTokenResponse kakaoIssueTokens(String authCode) {
+        RestTemplate restTemplate = new RestTemplate();
+
         KakaoTokenRequest kakaoTokenRequestParam = KakaoTokenRequest
                 .builder()
                 .grantType("authorization_code")
@@ -87,17 +115,39 @@ public class LoginService {
         ResponseEntity<KakaoTokenResponse> kakaoTokenResponse = restTemplate.postForEntity(
                 "https://kauth.kakao.com/oauth/token", httpEntity, KakaoTokenResponse.class);
 
-        System.out.println(kakaoTokenResponse.getBody());
-        return "";
+        return kakaoTokenResponse.getBody();
     }
 
-    public NaverTokenResponse getNaverTokens(String authCode) {
-        String url = "https://nid.naver.com/oauth2.0/token?grant_type=authorization_code&client_id=" + naverClientId + "&client_secret=" + naverClientPw + "&code=" + authCode;
-        System.out.println(url);
-        RestTemplate restTemplate = new RestTemplate();
-        ResponseEntity<NaverTokenResponse> naverTokenResponse = restTemplate.getForEntity(url, NaverTokenResponse.class);
-        System.out.println(naverTokenResponse);
-        return naverTokenResponse.getBody();
+
+    // ==============get info methods==============
+    public GoogleInfResponse googleGetUserInfo(GoogleResponse googleTokenResponse) {
+        String jwtToken = googleTokenResponse.getId_token();
+        Map<String, String> map=new HashMap<>();
+        map.put("id_token",jwtToken);
+        ResponseEntity<GoogleInfResponse> googleInfoResponse = restTemplate.postForEntity("https://oauth2.googleapis.com/tokeninfo",
+                map, GoogleInfResponse.class);
+
+        return googleInfoResponse.getBody();
     }
 
+    public NaverInfoResponse naverGetUserInfo(NaverTokenResponse naverTokenResponse) {
+        HttpHeaders headers = new HttpHeaders();
+        headers.setContentType(MediaType.APPLICATION_JSON);
+        headers.set("Authorization", "Bearer " + naverTokenResponse.getAccess_token());
+
+        HttpEntity<String> entity = new HttpEntity<>(headers);
+
+        ResponseEntity<NaverInfoResponse> naverInfoResponse = restTemplate.exchange(
+                "https://openapi.naver.com/v1/nid/me",
+                HttpMethod.GET,
+                entity,
+                NaverInfoResponse.class
+        );
+
+        return naverInfoResponse.getBody();
+    }
+
+    public void kakaoGetUserInfo(KakaoTokenResponse kakaoTokenResponse) {
+        
+    }
 }

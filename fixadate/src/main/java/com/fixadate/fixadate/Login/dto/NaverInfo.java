@@ -5,7 +5,7 @@ import lombok.NoArgsConstructor;
 
 @Data
 @NoArgsConstructor
-public class NaverInfo {
+public class NaverInfo {  //is an element of NaverInfoResponse
     private String id;
     private String profile_image;
     private String gender;

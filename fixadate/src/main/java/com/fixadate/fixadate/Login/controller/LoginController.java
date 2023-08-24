@@ -57,59 +57,30 @@ public class LoginController {
     // ==============afterlogin methods==============
     @GetMapping("/api/v1/oauth2/google")
     public String loginGoogle(@RequestParam(value = "code") String authCode) {
-        RestTemplate restTemplate = new RestTemplate();
-        GoogleRequest googleOAuthRequestParam = GoogleRequest
-                .builder()
-                .clientId(googleClientId)
-                .clientSecret(googleClientPw)
-                .code(authCode)
-                .redirectUri(googleRedirectUri)
-                .grantType("authorization_code").build();
-        ResponseEntity<GoogleResponse> resultEntity = restTemplate.postForEntity("https://oauth2.googleapis.com/token",
-                googleOAuthRequestParam, GoogleResponse.class);
-        String jwtToken=resultEntity.getBody().getId_token();
-        Map<String, String> map=new HashMap<>();
-        map.put("id_token",jwtToken);
-        ResponseEntity<GoogleInfResponse> resultEntity2 = restTemplate.postForEntity("https://oauth2.googleapis.com/tokeninfo",
-                map, GoogleInfResponse.class);
-        String email=resultEntity2.getBody().getEmail();
-        System.out.println(resultEntity2.getBody());
+        GoogleResponse googleTokenResponse = loginService.googleIssueTokens(authCode);
+
+        GoogleInfResponse googleInfoResponse = loginService.googleGetUserInfo(googleTokenResponse);
+
+        String email = googleInfoResponse.getEmail();
 
         return email;
     }
 
-
-//    https://nid.naver.com/oauth2.0/token?grant_type=authorization_code&client_id=jyvqXeaVOVmV&client_secret=527300A0_COq1_XV33cf&code=EIc5bFrl4RibFls1&state=9kgsGTfH4j7IyAkg
     @GetMapping("/api/naver/login")
     public String afterLoginNaver(@RequestParam(value = "code") String authCode) {
-        String url = "https://nid.naver.com/oauth2.0/token?grant_type=authorization_code&client_id=" + naverClientId + "&client_secret=" + naverClientPw + "&code=" + authCode;
-        System.out.println(url);
-        RestTemplate restTemplate = new RestTemplate();
-        ResponseEntity<NaverTokenResponse> naverTokenResponse = restTemplate.getForEntity(url, NaverTokenResponse.class);
-        System.out.println(naverTokenResponse);
+        NaverTokenResponse naverTokenResponse = loginService.naverIssueTokens(authCode);
 
-        System.out.println(naverTokenResponse.getBody().getAccess_token());
-        HttpHeaders headers = new HttpHeaders();
-        headers.setContentType(MediaType.APPLICATION_JSON);
-        headers.set("Authorization", "Bearer " + naverTokenResponse.getBody().getAccess_token());
+        NaverInfoResponse naverInfoResponse = loginService.naverGetUserInfo(naverTokenResponse);
 
-        HttpEntity<String> entity = new HttpEntity<>(headers);
+        System.out.println(naverInfoResponse.getResponse());
 
-        ResponseEntity<NaverInfoResponse> naverInfoResponse = restTemplate.exchange(
-                "https://openapi.naver.com/v1/nid/me",
-                HttpMethod.GET,
-                entity,
-                NaverInfoResponse.class
-        );
-
-        System.out.println(naverInfoResponse.getBody().getResponse());
         return "";
     }
 
-
     @GetMapping("/api/kakao/login")
     public String afterLoginKakao(@RequestParam(value = "code") String authCode) {
-         return loginService.kakaoIssueTokens(authCode);
+        KakaoTokenResponse kakaoTokenResponse = loginService.kakaoIssueTokens(authCode);
+        return "";
     }
 
 }
