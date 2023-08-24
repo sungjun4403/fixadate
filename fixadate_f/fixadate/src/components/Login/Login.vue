@@ -1,22 +1,25 @@
 <template>
     <div>
+        <div>
             <h2>SIGN IN</h2>
         </div>
-        
+
         <div>
             <h2>SIGN UP</h2>
         </div>
 
-        <button @click="getGoogleLoginUrl()">
-            GOOGLE LOGIN
+        <button id="googleSignUpButton" @click="getGoogleLoginUrl()">
+            Sign up with Google
         </button>
+        <br><br>
 
-        <button @click="getNaverLoginUrl()">
-            naver login
+        <button  id="naverSignUpButton" @click="getNaverLoginUrl()">
+            Sign up with Naver
         </button>        
+        <br><br>
 
-        <button @click="getKakaoLoginUrl()">
-            kakao login
+        <button id="kakaoSignUpButton" @click="getKakaoLoginUrl()">
+            Sign up with Kakao
         </button>
            
     </div>
@@ -31,8 +34,8 @@ export default {
     methods: {
         getGoogleLoginUrl() {
             axios({
-                url: "http://localhost:8080/api/v1/oauth2/google",
-                method: "post"
+                url: "http://localhost:8080/getgoogleloginurl",
+                method: "get"
             }).then((response) => {
                 document.location.href = response.data
             })
@@ -60,5 +63,20 @@ export default {
 </script>
 
 <style scoped>
+    button {
+        border: none;
+    }
+
+    #googleSignUpButton {
+        background-color: white;
+    }
+
+    #naverSignUpButton {
+        background-color: greenyellow;
+    }
+
+    #kakaoSignUpButton {
+        background-color: yellow;
+    }
 
 </style>
