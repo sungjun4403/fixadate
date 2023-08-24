@@ -57,7 +57,7 @@ kakao:
         redirect_uri: "http://localhost:3000/kakaoafterlogin"
 
 
-apple:
-    client:
-        id:
-        pw:
+#apple:
+#    client:
+#        id:
+#        pw:

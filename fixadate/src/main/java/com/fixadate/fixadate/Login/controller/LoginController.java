@@ -30,22 +30,33 @@ public class LoginController {
     private String googleRedirectUri;
     @Value("${naver.client.redirect_uri}")
     private String naverRedirectUrl;
-    @Value("${kakao.client.id}")
-    private String kakaoClientId;
-    @Value("${kakao.client.redirect_uri}")
-    private String kakaoRedirectUri;
 
-//    @GetMapping("")
-//    public void
 
-    @RequestMapping(value="/api/v1/oauth2/google", method = RequestMethod.POST)
-    public String afterLoginUrlGoogle(){
-        String reqUrl = "https://accounts.google.com/o/oauth2/v2/auth?client_id=" + googleClientId
-                + "&redirect_uri=" + googleRedirectUri + "&response_type=code&scope=email%20profile%20openid&access_type=offline";
-        return reqUrl;
+    // ==============getloginurl methods==============
+    @GetMapping("/getgoogleloginurl")
+    public String loginUrlGoogle() {
+        return loginService.loginUrlGoogle();
     }
-    @RequestMapping(value="/api/v1/oauth2/google", method = RequestMethod.GET)
-    public String loginGoogle(@RequestParam(value = "code") String authCode){
+
+    @GetMapping("/getnaverloginurl")
+    public String loginUrlNaver() {
+        return loginService.loginUrlNaver();
+    }
+
+    @GetMapping("/getkakaologinurl")
+    public String loginUrlKakao() {
+        return loginService.loginUrlKakao();
+    }
+
+    @GetMapping("/getappleloginurl")
+    public String loginUrlApple() {
+        return loginService.loginUrlApple();
+    }
+
+
+    // ==============afterlogin methods==============
+    @GetMapping("/api/v1/oauth2/google")
+    public String loginGoogle(@RequestParam(value = "code") String authCode) {
         RestTemplate restTemplate = new RestTemplate();
         GoogleRequest googleOAuthRequestParam = GoogleRequest
                 .builder()
@@ -67,12 +78,6 @@ public class LoginController {
         return email;
     }
 
-    @GetMapping("/getnaverloginurl")
-    public String loginUrlNaver() {
-        //https://nid.naver.com/oauth2.0/authorize?response_type=code&client_id=${clientId}&redirect_uri=${redirectUri}
-        String url = "https://nid.naver.com/oauth2.0/authorize?response_type=code&client_id=" + naverClientId + "&redirect_uri=" + naverRedirectUrl;
-        return url;
-    }
 
 //    https://nid.naver.com/oauth2.0/token?grant_type=authorization_code&client_id=jyvqXeaVOVmV&client_secret=527300A0_COq1_XV33cf&code=EIc5bFrl4RibFls1&state=9kgsGTfH4j7IyAkg
     @GetMapping("/api/naver/login")
@@ -101,19 +106,11 @@ public class LoginController {
         return "";
     }
 
-    @GetMapping("/getkakaologinurl")
-    public String loginUrlKakao() {
-        return loginService.loginUrlKakao();
-    }
 
     @GetMapping("/api/kakao/login")
     public String afterLoginKakao(@RequestParam(value = "code") String authCode) {
          return loginService.kakaoIssueTokens(authCode);
     }
 
-    @GetMapping("/getappleloginurl")
-    public String loginUrlApple() {
-        return loginService.loginUrlApple();
-    }
 }
 
