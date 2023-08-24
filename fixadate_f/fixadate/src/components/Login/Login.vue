@@ -1,5 +1,12 @@
 <template>
     <div>
+            <h2>SIGN IN</h2>
+        </div>
+        
+        <div>
+            <h2>SIGN UP</h2>
+        </div>
+
         <button @click="getGoogleLoginUrl()">
             GOOGLE LOGIN
         </button>

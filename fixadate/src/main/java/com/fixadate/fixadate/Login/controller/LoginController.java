@@ -35,6 +35,9 @@ public class LoginController {
     @Value("${kakao.client.redirect_uri}")
     private String kakaoRedirectUri;
 
+//    @GetMapping("")
+//    public void
+
     @RequestMapping(value="/api/v1/oauth2/google", method = RequestMethod.POST)
     public String afterLoginUrlGoogle(){
         String reqUrl = "https://accounts.google.com/o/oauth2/v2/auth?client_id=" + googleClientId
