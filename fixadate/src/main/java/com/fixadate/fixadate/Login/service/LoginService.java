@@ -148,6 +148,6 @@ public class LoginService {
     }
 
     public void kakaoGetUserInfo(KakaoTokenResponse kakaoTokenResponse) {
-        
+
     }
 }

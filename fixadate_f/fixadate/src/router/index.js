@@ -12,6 +12,7 @@ import GoogleAfterLogin from '../components/Login/GoogleAfterLogin.vue'
 import NaverAfterLogin from '../components/Login/NaverAfterLogin.vue'
 import AppleAfterLogin from '../components/Login/AppleAfterLogin.vue'
 import KakaoAfterLogin from '../components/Login/KakaoAfterLogin.vue'
+import InfoInput from '../components/Login/InfoInput.vue'
 
 import exception404 from '../components/Exceptions/exception404.vue'
 
@@ -32,10 +33,12 @@ const routes= [
     { path: "/naverafterlogin", name: "NaverAfterLogin", component: NaverAfterLogin},
     { path: "/appleafterlogin", name: "AppleAfterLogin", component: AppleAfterLogin},
     { path: "/kakaoafterlogin", name: "KakaoAfterLogin", component: KakaoAfterLogin},
+    { path: "/infoinput", name: "InfoInput", component: InfoInput},
 
     //Exceptions
     { path: "/404", name: "exception404", component: exception404},
     { path: "/:pathMatch(.*)*", redirect: '/404'},
+    
     
 ]
 
