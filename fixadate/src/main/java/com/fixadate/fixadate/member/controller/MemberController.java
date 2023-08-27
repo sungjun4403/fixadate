@@ -30,11 +30,14 @@ public class MemberController {
         memberService.edit(memberEdit, memberId);
     }
 
-
     //DELETE
     @DeleteMapping("/member/{memberId}")
     public void delete (@PathVariable Long memberId) {
         memberService.delete(memberId);
     }
 
+    @GetMapping("/getrandnick")
+    public String getRandNick() {
+        return memberService.getRandNick();
+    }
 }

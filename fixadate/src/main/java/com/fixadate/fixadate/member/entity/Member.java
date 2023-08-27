@@ -27,8 +27,11 @@ public class Member extends BaseTimeEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "memberId")
     private Long id;
-
+    private String oauthId;
+    private String oauthPlatform;
+    private String refreshToken;
     private String name;
+    private String profileImg;
     private String nickname;
     private Integer birth;
     private Boolean gender; //boolean to selection
@@ -44,6 +47,10 @@ public class Member extends BaseTimeEntity {
     public MemberEditor.MemberEditorBuilder toEditor() {
         return MemberEditor.builder()
                 .name(name)
+                .refreshToken(refreshToken)
+                .oauthId(oauthId)
+                .oauthPlatform(oauthPlatform)
+                .profileImg(profileImg)
                 .nickname(nickname)
                 .birth(birth)
                 .gender(gender)
@@ -54,6 +61,10 @@ public class Member extends BaseTimeEntity {
 
     public void edit(MemberEditor memberEditor) {
         name = memberEditor.getName();
+        refreshToken = memberEditor.getRefreshToken();
+        oauthId = memberEditor.getOauthId();
+        oauthPlatform = memberEditor.getOauthPlatform();
+        profileImg = memberEditor.getProfileImg();
         nickname = memberEditor.getNickname();
         birth = memberEditor.getBirth();
         gender = memberEditor.getGender();

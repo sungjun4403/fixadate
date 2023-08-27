@@ -4,6 +4,8 @@ package com.fixadate.fixadate.Login.service;
 import com.fixadate.fixadate.Login.dto.*;
 import com.fixadate.fixadate.Login.dto.kakao.KakaoTokenRequest;
 import com.fixadate.fixadate.Login.dto.kakao.KakaoTokenResponse;
+import com.fixadate.fixadate.member.dto.MemberCreate;
+import com.fixadate.fixadate.member.service.MemberService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.*;
@@ -40,9 +42,11 @@ public class LoginService {
     @Value("${kakao.client.redirect_uri}")
     private String kakaoRedirectUri;
 
+    private final MemberService memberService;
+
     RestTemplate restTemplate = new RestTemplate();
 
-    // ==============getloginurl methods==============
+    // ============== getloginurl methods ==============
     public String loginUrlGoogle() {
         return "https://accounts.google.com/o/oauth2/v2/auth?client_id=" + googleClientId
                 + "&redirect_uri=" + googleRedirectUri
@@ -66,7 +70,7 @@ public class LoginService {
     }
 
 
-    // ==============get tokens methods==============
+    // ============== get tokens methods ==============
     public GoogleResponse googleIssueTokens(String authCode) {
         GoogleRequest googleOAuthRequestParam = GoogleRequest
                 .builder()
@@ -119,7 +123,7 @@ public class LoginService {
     }
 
 
-    // ==============get info methods==============
+    // ============== get info methods ==============
     public GoogleInfResponse googleGetUserInfo(GoogleResponse googleTokenResponse) {
         String jwtToken = googleTokenResponse.getId_token();
         Map<String, String> map=new HashMap<>();
@@ -150,4 +154,8 @@ public class LoginService {
     public void kakaoGetUserInfo(KakaoTokenResponse kakaoTokenResponse) {
 
     }
+
+    // ============== packing up for memberService ==============
+
+
 }

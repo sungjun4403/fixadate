@@ -9,14 +9,22 @@ import com.fixadate.fixadate.member.entity.Member;
 import com.fixadate.fixadate.member.repository.MemberRepository;
 import com.fixadate.fixadate.memberTeam.entity.MemberTeam;
 import lombok.RequiredArgsConstructor;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+
+import java.util.List;
 
 
 @RequiredArgsConstructor
 @Transactional
 @Service
 public class MemberService {
+    @Value("${randNick.adjs}")
+    private List<String> RandNickAdjs;
+    @Value("${randNick.nouns}")
+    private List<String> RandNickNouns;
+
     private final MemberRepository memberRepository;
 
     //CREATE MEMBER
@@ -24,6 +32,8 @@ public class MemberService {
 
         Member member = Member.builder()
                 .name(memberCreate.getName())
+                .oauthId(memberCreate.getOauthId())
+                .oauthPlatform(memberCreate.getOauthPlatform())
                 .nickname(memberCreate.getNickname())
                 .birth(memberCreate.getBirth())
                 .gender(memberCreate.getGender())
@@ -72,11 +82,21 @@ public class MemberService {
         return MemberResponse.builder()
                 .id(member.getId())
                 .name(member.getName())
+                .oauthId(member.getOauthId())
+                .oauthPlatform(member.getOauthPlatform())
                 .nickname(member.getNickname())
                 .birth(member.getBirth())
                 .gender(member.getGender())
                 .profession(member.getProfession())
                 .signatureColor(member.getSignatureColor())
                 .build();
+    }
+
+
+    public String getRandNick() {
+        Integer randint1 = (int) ((Math.random()) * 19 + 1);
+        Integer randint2 = (int) ((Math.random()) * 19 + 1);
+
+        return RandNickAdjs.get(randint1).toString() + " " + RandNickNouns.get(randint2).toString();
     }
 }
