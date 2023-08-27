@@ -35,7 +35,10 @@ public class LoginController {
     //info required for sign up -
     //  name, refreshToken, oauthId, oauthPlatform, profileImg, nickname, birth, gender, profession, signatureColor
     //  이성준, cddkhwjkej212, 212312, Naver, https://s3bucket/,  비싼 크롸쌍, 040521, true, univ student, rgba(0, 0, 0, 0)
-    //
+    //  editable data (user): profileImg, nickname, birth, profession, signatureColor
+    //  editable data (server): refreshToken
+    //  static data:  name, gender, birth, oauthId, oauthPlatform,
+
 
     // ==============getloginurl methods==============
     @GetMapping("/getgoogleloginurl")
@@ -88,5 +91,18 @@ public class LoginController {
         return "";
     }
 
+    @GetMapping("/api/token/issue/{platform}")
+    public String issueToken(@PathVariable String platform,
+        @RequestParam(value = "ifAccessToken") String ifAccessToken,
+        @RequestParam(value = "ifRefreshToken") String ifRefreshToken) {
+
+
+        System.out.println(platform);
+        System.out.println(ifAccessToken);
+        System.out.println(ifRefreshToken);
+
+
+        return "";
+    }
 }
 

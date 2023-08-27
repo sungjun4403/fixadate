@@ -1,6 +1,7 @@
 <template>
     <div>
         KAKAOAAKAAKAKKAK
+        <button @click="issueToken()">doihjsk</button>
     </div>
 </template>
 
@@ -21,6 +22,19 @@ export default {
             console.log(code)
             axios ({
                 url: "http://localhost:8080/api/kakao/login?" + code,
+                method: "get"
+            }).then((response) => {
+                // console.log(response.data)
+                // this.issueToken()
+            })
+        },
+
+        issueToken() {
+            axios ({
+                url: "http://localhost:8080/api/token/issue/" 
+                + "kakao" 
+                + "?ifAccessToken=true" 
+                + "&ifRefreshToken=true",
                 method: "get"
             }).then((response) => {
                 console.log(response.data)
