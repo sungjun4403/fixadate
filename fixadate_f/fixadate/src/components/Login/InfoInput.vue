@@ -39,27 +39,34 @@
 import axios from 'axios'
 
 export default {
+    name: "InfoInput",
+    props: ['info'],
     setup() {
         
     },
 
-    beforMount() {
-        fillInfo()
+    mounted() {
+        this.fillInfo()
     },
 
     methods: {
         fillInfo() {
-            axios ({
-                url: "http://localhost:8080/",
-                method: ""
-            }).then((response) => {
-                document.getElementById("name").value = response.data
-                document.getElementById("nickname").value = response.data
-                document.getElementById("profileImg").value = response.data
-                //gender if
-                document.getElementById("age").value = response.data
-                document.getElementById("nickname").value = response.data 
-            })
+            console.log(this.info)
+            
+            // console.log(info)
+            console.log("sdsdsd")
+
+            // axios ({
+            //     url: "http://localhost:8080/",
+            //     method: ""
+            // }).then((response) => {
+            //     document.getElementById("name").value = response.data
+            //     document.getElementById("nickname").value = response.data
+            //     document.getElementById("profileImg").value = response.data
+            //     //gender if
+            //     document.getElementById("age").value = response.data
+            //     document.getElementById("nickname").value = response.data 
+            // })
         },
 
         getRandNick() {

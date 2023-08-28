@@ -1,12 +1,12 @@
 <template>
     <div>
-        KAKAOAAKAAKAKKAK
-        <button @click="issueToken()">doihjsk</button>
+        redirecting (kakao)
     </div>
 </template>
 
 <script>
 import axios from 'axios'
+import router from '../../router'
 export default {
     setup() {
         
@@ -23,10 +23,23 @@ export default {
                 url: "http://localhost:8080/api/kakao/login?" + code,
                 method: "get"
             }).then((response) => {
-                console.log(response.data)
+                // console.log(response.data)
+                router.push({
+                    name: "InfoInput",
+                    params: {
+                        info: response.data,
+                        name: "",
+                        gender: "",
+                        profileImg: "",
+                        birth: ""
+                    }
+                })
+
+
             })
         },
     }
+    
 }
 </script>
 

@@ -29,11 +29,11 @@ const routes= [
 
     //Login 
     { path: "/login", name: "Login", component: Login },
-    { path: "/googleafterlogin", name: "GoogleAfterLogin", component: GoogleAfterLogin }, 
-    { path: "/naverafterlogin", name: "NaverAfterLogin", component: NaverAfterLogin},
-    { path: "/appleafterlogin", name: "AppleAfterLogin", component: AppleAfterLogin},
-    { path: "/kakaoafterlogin", name: "KakaoAfterLogin", component: KakaoAfterLogin},
-    { path: "/infoinput", name: "InfoInput", component: InfoInput},
+    { path: "/googleafterlogin", name: "GoogleAfterLogin", component: GoogleAfterLogin, props: true}, 
+    { path: "/naverafterlogin", name: "NaverAfterLogin", component: NaverAfterLogin, props: true},
+    { path: "/appleafterlogin", name: "AppleAfterLogin", component: AppleAfterLogin, props: true},
+    { path: "/kakaoafterlogin", name: "KakaoAfterLogin", component: KakaoAfterLogin, props: true},
+    { path: "/infoinput", name: "InfoInput", component: InfoInput, props: true},
 
     //Exceptions
     { path: "/404", name: "exception404", component: exception404},
