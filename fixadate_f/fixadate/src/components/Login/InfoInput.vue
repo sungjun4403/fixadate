@@ -89,7 +89,7 @@ export default {
                     profileImg: this.profileImg,
                     nickname: document.getElementById("nickname").value,
                     birth: document.getElementById("birth").value,
-                    profession: document.getElementById("profession").value,
+                    // profession: document.getElementById("profession").value,
                     signatureColor: ""
                 }
             }).then((response) => {
