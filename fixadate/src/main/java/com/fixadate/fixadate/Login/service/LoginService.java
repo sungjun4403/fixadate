@@ -4,7 +4,6 @@ package com.fixadate.fixadate.Login.service;
 import com.fixadate.fixadate.Login.dto.*;
 import com.fixadate.fixadate.Login.dto.kakao.KakaoTokenRequest;
 import com.fixadate.fixadate.Login.dto.kakao.KakaoTokenResponse;
-import com.fixadate.fixadate.member.dto.MemberCreate;
 import com.fixadate.fixadate.member.service.MemberService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Value;
@@ -16,7 +15,6 @@ import org.springframework.util.MultiValueMap;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.client.RestTemplate;
 
-import javax.swing.text.html.parser.Entity;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -151,10 +149,18 @@ public class LoginService {
         return naverInfoResponse.getBody();
     }
 
-    public void kakaoGetUserInfo(KakaoTokenResponse kakaoTokenResponse) {
+    public String kakaoGetUserInfo(KakaoTokenResponse kakaoTokenResponse) {
+        RestTemplate restTemplate = new RestTemplate();
 
+
+        HttpHeaders headers = new HttpHeaders();
+        headers.set("Authorization", "Bearer "+kakaoTokenResponse.getAccess_token());
+
+        HttpEntity<Object> httpEntity = new HttpEntity<>(headers);
+        String result = String.valueOf(restTemplate.exchange("https://kapi.kakao.com/v2/user/me", HttpMethod.GET, httpEntity, String.class));
+        System.out.println(result);
+        return result;
     }
-
     // ============== packing up for memberService ==============
 
 

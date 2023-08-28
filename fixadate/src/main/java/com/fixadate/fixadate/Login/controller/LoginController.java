@@ -88,7 +88,8 @@ public class LoginController {
     @GetMapping("/api/kakao/login")
     public String afterLoginKakao(@RequestParam(value = "code") String authCode) {
         KakaoTokenResponse kakaoTokenResponse = loginService.kakaoIssueTokens(authCode);
-        return "";
+
+        return loginService.kakaoGetUserInfo(kakaoTokenResponse);
     }
 
     @GetMapping("/api/token/issue/{platform}")
@@ -96,10 +97,6 @@ public class LoginController {
         @RequestParam(value = "ifAccessToken") String ifAccessToken,
         @RequestParam(value = "ifRefreshToken") String ifRefreshToken) {
 
-
-        System.out.println(platform);
-        System.out.println(ifAccessToken);
-        System.out.println(ifRefreshToken);
 
 
         return "";
