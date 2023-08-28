@@ -1,9 +1,8 @@
-package com.fixadate.fixadate.Login.dto;
+package com.fixadate.fixadate.Login.dto.naver;
 
+import com.fixadate.fixadate.Login.dto.naver.NaverInfo;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-
-import java.util.Map;
 
 @Data
 @NoArgsConstructor

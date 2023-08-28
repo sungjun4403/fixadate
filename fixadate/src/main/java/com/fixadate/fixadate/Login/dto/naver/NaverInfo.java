@@ -1,4 +1,4 @@
-package com.fixadate.fixadate.Login.dto;
+package com.fixadate.fixadate.Login.dto.naver;
 
 import lombok.Data;
 import lombok.NoArgsConstructor;

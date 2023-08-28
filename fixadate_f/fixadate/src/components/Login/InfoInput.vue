@@ -7,11 +7,11 @@
 
         <input id="name" placeholder="name" size="10"> <br><br>
         
-        gender
-        <input type="checkbox"><input type="checkbox"> <br><br>
+        gender <br>
+        <input type="checkbox" id="male">male <input type="checkbox" id="female">female <br><br>
 
         age
-        <input id="age" placeholder="name" size="10"> <br><br>
+        <input id="birth" placeholder="birth" size="10"> <br><br>
 
         profession
         <select>
@@ -29,7 +29,7 @@
         </select>
 
         
-
+        <button @click="signUp()">submit</button>
 
 
     </div>
@@ -40,7 +40,7 @@ import axios from 'axios'
 
 export default {
     name: "InfoInput",
-    props: ['info'],
+    props: ['oauthId', 'oauthPlatform', 'name', 'gender', 'profileImg', 'birth'],
     setup() {
         
     },
@@ -51,22 +51,18 @@ export default {
 
     methods: {
         fillInfo() {
-            console.log(this.info)
+        
+            document.getElementById("name").value = this.name
+            document.getElementById("nickname").value = ""
+            if (this.gender == "male") {
+                document.getElementById("male").checked = true
+            }
+            if (this.gender == "female") {
+                document.getElementById("female").checked = true
+            }
+            // document.getElementById("profileImg").value = this.gender
             
-            // console.log(info)
-            console.log("sdsdsd")
-
-            // axios ({
-            //     url: "http://localhost:8080/",
-            //     method: ""
-            // }).then((response) => {
-            //     document.getElementById("name").value = response.data
-            //     document.getElementById("nickname").value = response.data
-            //     document.getElementById("profileImg").value = response.data
-            //     //gender if
-            //     document.getElementById("age").value = response.data
-            //     document.getElementById("nickname").value = response.data 
-            // })
+            document.getElementById("birth").value = this.birth
         },
 
         getRandNick() {
@@ -75,6 +71,29 @@ export default {
                 method: "get"
             }).then((response) => {
                 document.getElementById("nickname").value = response.data
+            })
+        },
+
+        signUp() {
+            axios ({
+                url: "http://localhost:8080/member",
+                method: "post",
+                headers: {
+                    'Authorization' : 'Bearer ' + ""
+                },
+                data: {
+                    oauthId: this.oauthId,
+                    oauthPlatform: this.oauthPlatform,
+                    refreshToken: "",
+                    name: document.getElementById("name").value,
+                    profileImg: this.profileImg,
+                    nickname: document.getElementById("nickname").value,
+                    birth: document.getElementById("birth").value,
+                    profession: document.getElementById("profession").value,
+                    signatureColor: ""
+                }
+            }).then((response) => {
+                console.log(response)
             })
         }
     }

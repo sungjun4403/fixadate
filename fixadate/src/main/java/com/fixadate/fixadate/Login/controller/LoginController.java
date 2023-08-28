@@ -1,17 +1,15 @@
 package com.fixadate.fixadate.Login.controller;
 
-import com.fixadate.fixadate.Login.dto.*;
-import com.fixadate.fixadate.Login.dto.kakao.KakaoTokenRequest;
+import com.fixadate.fixadate.Login.dto.google.GoogleInfResponse;
+import com.fixadate.fixadate.Login.dto.google.GoogleResponse;
+import com.fixadate.fixadate.Login.dto.kakao.KakaoInfoResponse;
 import com.fixadate.fixadate.Login.dto.kakao.KakaoTokenResponse;
+import com.fixadate.fixadate.Login.dto.naver.NaverInfoResponse;
+import com.fixadate.fixadate.Login.dto.naver.NaverTokenResponse;
 import com.fixadate.fixadate.Login.service.LoginService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.http.*;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.client.RestTemplate;
-
-import java.util.HashMap;
-import java.util.Map;
 
 @RequiredArgsConstructor
 @RestController
@@ -86,7 +84,7 @@ public class LoginController {
     }
 
     @GetMapping("/api/kakao/login")
-    public String afterLoginKakao(@RequestParam(value = "code") String authCode) {
+    public KakaoInfoResponse afterLoginKakao(@RequestParam(value = "code") String authCode) {
         KakaoTokenResponse kakaoTokenResponse = loginService.kakaoIssueTokens(authCode);
 
         return loginService.kakaoGetUserInfo(kakaoTokenResponse);

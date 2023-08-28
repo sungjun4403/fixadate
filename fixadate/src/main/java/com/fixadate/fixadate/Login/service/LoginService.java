@@ -1,9 +1,14 @@
 package com.fixadate.fixadate.Login.service;
 
 
-import com.fixadate.fixadate.Login.dto.*;
+import com.fixadate.fixadate.Login.dto.google.GoogleInfResponse;
+import com.fixadate.fixadate.Login.dto.google.GoogleRequest;
+import com.fixadate.fixadate.Login.dto.google.GoogleResponse;
+import com.fixadate.fixadate.Login.dto.kakao.KakaoInfoResponse;
 import com.fixadate.fixadate.Login.dto.kakao.KakaoTokenRequest;
 import com.fixadate.fixadate.Login.dto.kakao.KakaoTokenResponse;
+import com.fixadate.fixadate.Login.dto.naver.NaverInfoResponse;
+import com.fixadate.fixadate.Login.dto.naver.NaverTokenResponse;
 import com.fixadate.fixadate.member.service.MemberService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Value;
@@ -149,17 +154,20 @@ public class LoginService {
         return naverInfoResponse.getBody();
     }
 
-    public String kakaoGetUserInfo(KakaoTokenResponse kakaoTokenResponse) {
+    public KakaoInfoResponse kakaoGetUserInfo(KakaoTokenResponse kakaoTokenResponse) {
         RestTemplate restTemplate = new RestTemplate();
+
 
 
         HttpHeaders headers = new HttpHeaders();
         headers.set("Authorization", "Bearer "+kakaoTokenResponse.getAccess_token());
 
         HttpEntity<Object> httpEntity = new HttpEntity<>(headers);
-        String result = String.valueOf(restTemplate.exchange("https://kapi.kakao.com/v2/user/me", HttpMethod.GET, httpEntity, String.class));
-        System.out.println(result);
-        return result;
+//        String result = String.valueOf(restTemplate.exchange("https://kapi.kakao.com/v2/user/me", HttpMethod.GET, httpEntity, String.class));
+//        System.out.println(result);
+        ResponseEntity<KakaoInfoResponse> kakaoInfoResponse = restTemplate.exchange("https://kapi.kakao.com/v2/user/me", HttpMethod.GET, httpEntity, KakaoInfoResponse.class);
+        System.out.println(kakaoInfoResponse);
+        return kakaoInfoResponse.getBody();
     }
     // ============== packing up for memberService ==============
 
