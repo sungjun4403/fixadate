@@ -195,10 +195,12 @@ typ=JWT
   
 <img width="400" src="https://github.com/sungjun4403/fixadate/assets/96364048/8bb5c379-9c3a-43fe-a2ca-901f147f13a2">
 
+<br/>
+
 * * * *
 
 <h3>8. kakao 로그인 구현 및 trubleshooting</h3>
-2023/08/15 ~ 2023/08/22<br/>
+2023/08/15 ~ 2023/08/23<br/>
 
 <br/>
 
@@ -209,11 +211,32 @@ typ=JWT
 * * * *
 
 <h3>9. trubleshooting& exception handling, login controller, login service refactoring</h3>
-2023/08/23 ~ <br/>
+2023/08/25 ~ <br/>
 
 <br/>
 
-- vue 404 handling
+- vue 404 handling, 코드 일관화(?), 주석 달고 어쩌구 저쩌구, 뭘 하긴 했는데 따로 적기는 좀 애매한 내용들 뿐이네... 과감히 로그 패스~!
 
+<br/>
 
+* * * *
 
+<h3>10. kakao 회원가입 구현 및 토큰 검증 맛보기</h3>
+2023/08/25 ~ 2023/08/30<br/>
+
+일단 눈물 한번 닦고,,, 미친채 쓴 장문의 눈물 젖은 찡찡이 보고 가시겠습니다
+
+<img width="600" src="https://github.com/sungjun4403/fixadate/assets/96364048/9c7eadb6-4e54-408d-8078-5bd3265e99b0">
+
+<br/><br/>
+
+아래는 Input
+<img width="392" src="https://github.com/sungjun4403/fixadate/assets/96364048/5df41fb6-c2f4-4532-9771-7792b251000c">
+
+<br/><br/>
+
+아래는 DB에 푸시된 결과... 일단 다 드가긴 함... AccessToken 검증하고 저장하거나 refresh_token_expires_in은 이제 구현해야됨
+<img width="1500" src="https://github.com/sungjun4403/fixadate/assets/96364048/f84e178e-dc7d-479f-aafa-395fdf30b0b2">
+
+토큰 검증도 해봄. 필터 만들고 플랫폼별 구현만 하면 될듯...
+근데 스프링 업데이트 되면서 필터 많이 바꼈던데 진짜 벌써부터 무섭고 두렵고 손과 발이 벌벌 떨리고 눈물이 흐르고......................
