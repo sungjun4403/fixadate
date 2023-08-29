@@ -1,25 +1,34 @@
 <template>
     <div id="InfoInputBody">
         <h2>Input</h2>
-
-        <input id="nickname" placeholder="nickname" size="20"> 
-        <button id="getRandNickButton" @click="getRandNick()">🎲</button> <br><br>
-
-        <input id="name" placeholder="name" size="10"> <br><br>
         
+
+        profileImg<br>
+        <input class="InfoInputTag" id="profileImg" placeholder="profileImg" size="30"> <br><br>
+        <!-- --------------------------------------------------------------- -->
+        signatureColor<br>
+        <input class="InfoInputTag" id="signatureColor" placeholder="signatureColor" size="20"> <br><br>
+        <!-- --------------------------------------------------------------- -->
+        nickname <br>
+        <input class="InfoInputTag" id="nickname" placeholder="nickname" size="20"> 
+        <button id="getRandNickButton" @click="getRandNick()">🎲</button> <br><br>
+        <!-- --------------------------------------------------------------- -->
+        name <br>
+        <input class="InfoInputTag" id="name" placeholder="name" size="10"> <br><br>
+        <!-- --------------------------------------------------------------- -->
         gender <br>
         <input type="checkbox" id="male">male <input type="checkbox" id="female">female <br><br>
-
+        <!-- --------------------------------------------------------------- -->
         age
-        <input id="birth" placeholder="birth" size="10"> <br><br>
-
+        <input class="InfoInputTag" id="birth" placeholder="birth" size="10"> <br><br>
+        <!-- --------------------------------------------------------------- -->    
         profession
         <select>
             <option>== select profession ==</option>
             <optgroup label="Student">
                 <option>middleschool</option>
                 <option>highschool</option>
-                <option>University</option>
+                <option value="University">University</option>
             </optgroup>
             <optgroup label="직장인">
                 <option>디자인</option>
@@ -27,7 +36,7 @@
                 <option>교육</option>
             </optgroup>
         </select>
-
+        <!-- --------------------------------------------------------------- -->
         
         <button @click="signUp()">submit</button>
 
@@ -40,7 +49,7 @@ import axios from 'axios'
 
 export default {
     name: "InfoInput",
-    props: ['oauthId', 'oauthPlatform', 'name', 'gender', 'profileImg', 'birth'],
+    props: ['oauthId', 'oauthPlatform', 'name', 'gender', 'profileImg', 'birth', 'AccessToken', 'RefreshToken'],
     setup() {
         
     },
@@ -75,6 +84,13 @@ export default {
         },
 
         signUp() {
+            var genderVal = ""
+            if (document.getElementById("male").checked == true) {
+                genderVal = true
+            }
+            if (document.getElementById("female").checked == true) {
+                genderVal = true
+            }
             axios ({
                 url: "http://localhost:8080/member",
                 method: "post",
@@ -89,7 +105,7 @@ export default {
                     profileImg: this.profileImg,
                     nickname: document.getElementById("nickname").value,
                     birth: document.getElementById("birth").value,
-                    // profession: document.getElementById("profession").value,
+                    gender: genderVal,
                     signatureColor: ""
                 }
             }).then((response) => {

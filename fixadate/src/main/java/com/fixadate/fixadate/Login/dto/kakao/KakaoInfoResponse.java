@@ -11,4 +11,5 @@ public class KakaoInfoResponse {
     private String id;
     private Map<String, String> properties;
     private KakaoProfile kakao_account;
+    private KakaoTokenResponse kakaoTokenResponse;
 }

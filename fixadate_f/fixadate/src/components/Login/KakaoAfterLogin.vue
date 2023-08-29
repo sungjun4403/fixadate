@@ -23,6 +23,8 @@ export default {
                 url: "http://localhost:8080/api/kakao/login?" + code,
                 method: "get"
             }).then((response) => {
+                console.log(response.data)
+                console.log(response.data.kakaoTokenResponse.access_token)
                 router.push({
                     name: "InfoInput",
                     params: {
@@ -31,7 +33,10 @@ export default {
                         name: null,
                         gender: response.data.kakao_account.gender,
                         profileImg: response.data.properties.profile_image,
-                        birth: response.data.kakao_account.birthday
+                        birth: response.data.kakao_account.birthday,
+                        AccessToken: response.data.kakaoTokenResponse.access_token,
+                        RefreshToken: response.data.kakaoTokenResponse.refresh_token
+                        
                     }
                 })
 

@@ -156,9 +156,7 @@ public class LoginService {
 
     public KakaoInfoResponse kakaoGetUserInfo(KakaoTokenResponse kakaoTokenResponse) {
         RestTemplate restTemplate = new RestTemplate();
-
-
-
+        
         HttpHeaders headers = new HttpHeaders();
         headers.set("Authorization", "Bearer "+kakaoTokenResponse.getAccess_token());
 
@@ -166,7 +164,8 @@ public class LoginService {
 //        String result = String.valueOf(restTemplate.exchange("https://kapi.kakao.com/v2/user/me", HttpMethod.GET, httpEntity, String.class));
 //        System.out.println(result);
         ResponseEntity<KakaoInfoResponse> kakaoInfoResponse = restTemplate.exchange("https://kapi.kakao.com/v2/user/me", HttpMethod.GET, httpEntity, KakaoInfoResponse.class);
-        System.out.println(kakaoInfoResponse);
+        kakaoInfoResponse.getBody().setKakaoTokenResponse(kakaoTokenResponse);
+
         return kakaoInfoResponse.getBody();
     }
     // ============== packing up for memberService ==============
