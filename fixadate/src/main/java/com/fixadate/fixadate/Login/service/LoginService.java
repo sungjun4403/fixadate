@@ -156,7 +156,7 @@ public class LoginService {
 
     public KakaoInfoResponse kakaoGetUserInfo(KakaoTokenResponse kakaoTokenResponse) {
         RestTemplate restTemplate = new RestTemplate();
-        
+
         HttpHeaders headers = new HttpHeaders();
         headers.set("Authorization", "Bearer "+kakaoTokenResponse.getAccess_token());
 

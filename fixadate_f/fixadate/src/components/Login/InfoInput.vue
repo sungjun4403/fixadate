@@ -23,7 +23,7 @@
         <input class="InfoInputTag" id="birth" placeholder="birth" size="10"> <br><br>
         <!-- --------------------------------------------------------------- -->    
         profession
-        <select>
+        <select id="profession">
             <option>== select profession ==</option>
             <optgroup label="Student">
                 <option>middleschool</option>
@@ -50,16 +50,20 @@ import axios from 'axios'
 export default {
     name: "InfoInput",
     props: ['oauthId', 'oauthPlatform', 'name', 'gender', 'profileImg', 'birth', 'AccessToken', 'RefreshToken'],
-    setup() {
-        
+    setup() {    
     },
+
+    beforeMount() {
+        localStorage.setItem("oauthPlatform", this.oauthPlatform)
+        localStorage.setItem("AccessToken", this.AccessToken)
+    }, 
 
     mounted() {
         this.fillInfo()
     },
 
     methods: {
-        fillInfo() {
+        fillInfo() { //Oauth로 받아온 정보 input tag에 미리 채워넣는 메서드
         
             document.getElementById("name").value = this.name
             document.getElementById("nickname").value = ""
@@ -70,11 +74,10 @@ export default {
                 document.getElementById("female").checked = true
             }
             // document.getElementById("profileImg").value = this.gender
-            
             document.getElementById("birth").value = this.birth
         },
 
-        getRandNick() {
+        getRandNick() { //백에서 랜덤 닉네임 받아오기
             axios ({
                 url: "http://localhost:8080/getrandnick",
                 method: "get"
@@ -83,7 +86,8 @@ export default {
             })
         },
 
-        signUp() {
+        signUp() { // Create member
+            
             var genderVal = ""
             if (document.getElementById("male").checked == true) {
                 genderVal = true
@@ -91,22 +95,25 @@ export default {
             if (document.getElementById("female").checked == true) {
                 genderVal = true
             }
+
             axios ({
                 url: "http://localhost:8080/member",
                 method: "post",
                 headers: {
-                    'Authorization' : 'Bearer ' + ""
+                    'Authorization': 'Bearer ' + localStorage.AccessToken,
+                    'oauthPlatform': localStorage.oauthPlatform
                 },
                 data: {
                     oauthId: this.oauthId,
                     oauthPlatform: this.oauthPlatform,
-                    refreshToken: "",
                     name: document.getElementById("name").value,
-                    profileImg: this.profileImg,
+                    profileImg: document.getElementById("profileImg").value,
+                    profession: document.getElementById("profession").value,
                     nickname: document.getElementById("nickname").value,
                     birth: document.getElementById("birth").value,
                     gender: genderVal,
-                    signatureColor: ""
+                    signatureColor: document.getElementById("signatureColor").value,
+                    refreshToken: this.RefreshToken
                 }
             }).then((response) => {
                 console.log(response)

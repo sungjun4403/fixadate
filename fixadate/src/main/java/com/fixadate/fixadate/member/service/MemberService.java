@@ -38,7 +38,9 @@ public class MemberService {
                 .birth(memberCreate.getBirth())
                 .gender(memberCreate.getGender())
                 .profession(memberCreate.getProfession())
+                .profileImg(memberCreate.getProfileImg())
                 .signatureColor(memberCreate.getSignatureColor())
+                .refreshToken(memberCreate.getRefreshToken())
                 .build();
 
         memberRepository.save(member);
