@@ -33,9 +33,9 @@ public class LoginController {
     //info required for sign up -
     //  name, refreshToken, oauthId, oauthPlatform, profileImg, nickname, birth, gender, profession, signatureColor
     //  이성준, cddkhwjkej212, 212312, Naver, https://s3bucket/,  비싼 크롸쌍, 040521, true, univ student, rgba(0, 0, 0, 0)
-    //  editable data (user): profileImg, nickname, birth, profession, signatureColor
+    //  editable data (user): profileImg, nickname, profession, signatureColor
     //  editable data (server): refreshToken
-    //  static data:  name, gender, birth, oauthId, oauthPlatform,
+    //  static data:  name, gender, birth, oauthId, oauthPlatform, birth
 
 
     // ==============getloginurl methods==============
