@@ -259,4 +259,8 @@ typ=JWT
 
 - 이 코드로 CORS 문제가 해결되었었었따,,,
 - @Bean으로 등록해놓으면 우선순위로 request를 납치할 수 있을 줄 알았으나,,, spring security를 설치한 뒤에는 spring security가 priority를 가지게 되었다 -> 일단 spring security가 문제인걸 아는데도 꽤 오래걸림
-- @EnableWebSecurity 및에 아래 코드를 작성하면 될 줄 알았는데 역시 실패, spring security document에서 제공하는 cors solution을 사용하는 방법도 있었는데 
+- @EnableWebSecurity 및에 아래 코드를 작성하면 될 줄 알았는데 역시 실패, spring security document에서 제공하는 cors solution을 사용하는 방법도 있었는데 역시 안됨...
+- 이런 저런 방법 시도 할래도 latest release spring security가 심하게 많이 바뀌어서 참고할만한 포스팅이 거의 없음
+- unoffical, offical 둘 다 별로 도움이 안되는 다소 절망적인 상황
+- 과거에 구현했던 방법을 사용하려 보니 2021.05 즈음 버전,,, 너무 outdated 되어서 사용하기 애매함 + spring 버전도 안맞음(?)
+- 총체적 난국...
