@@ -240,3 +240,23 @@ typ=JWT
 
 토큰 검증도 해봄. 필터 만들고 플랫폼별 구현만 하면 될듯...
 근데 스프링 업데이트 되면서 필터 많이 바꼈던데 진짜 벌써부터 무섭고 두렵고 손과 발이 벌벌 떨리고 눈물이 흐르고......................
+
+<br/>
+
+* * * *
+
+<h3>11. jwt request filter, cors filter</h3>
+2023/08/31 ~ 2023/09/12<br/>
+
+- jwt request filter를 구현하기위해 spring security를 gradle에 설치함 -> 여기서부터 문제가 시작된건데...
+- 아래는 기존에 구현해놓은 CORS Configuration
+
+<br/>
+
+<img width="1100" src="https://github.com/sungjun4403/fixadate/assets/96364048/b6353efe-c055-4fc6-9817-ed66fadf8c58">
+
+<br/>
+
+- 이 코드로 CORS 문제가 해결되었었었따,,,
+- @Bean으로 등록해놓으면 우선순위로 request를 납치할 수 있을 줄 알았으나,,, spring security를 설치한 뒤에는 spring security가 priority를 가지게 되었다 -> 일단 spring security가 문제인걸 아는데도 꽤 오래걸림
+- @EnableWebSecurity 및에 아래 코드를 작성하면 될 줄 알았는데 역시 실패, spring security document에서 제공하는 cors solution을 사용하는 방법도 있었는데 
