@@ -263,4 +263,5 @@ typ=JWT
 - 이런 저런 방법 시도 할래도 latest release spring security가 심하게 많이 바뀌어서 참고할만한 포스팅이 거의 없음
 - unoffical, offical 둘 다 별로 도움이 안되는 다소 절망적인 상황
 - 과거에 구현했던 방법을 사용하려 보니 2021.05 즈음 버전,,, 너무 outdated 되어서 사용하기 애매함 + spring 버전도 안맞음(?)
+- 그렇다고 proxy를 쓰기에는... 좀 아닌데,,,
 - 총체적 난국...
