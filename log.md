@@ -267,3 +267,5 @@ typ=JWT
 - 총체적 난국...
 - 아 그리고 flutter 공부를 진짜 진짜 시작했는데 최근 flutter는 웹 배포도 가능하단다. 웹(vue) + 앱(flutter) / 웹 소개 페이지 -> 웹&앱(flutter) / 웹 소개 페이지로 개발하기로 했다. 웹 개발을 일단 중단하고 플러터로만 구현하려 한다.
 - figma 디자인을 flutter로 옮기는 법도 찾았다. 야호!
+- 진짜 야호! 개발 로그 작성하면서 CORS issue 해결했다! 역시 official document는 틀리지 않아
+- 
