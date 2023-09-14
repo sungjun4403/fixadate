@@ -1,17 +1,19 @@
 package com.fixadate.fixadate.jwt.service;
 
-import org.springframework.stereotype.Service;
+import com.fixadate.fixadate.member.entity.Member;
+import com.fixadate.fixadate.member.repository.MemberRepository;
 
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Optional;
 
+import com.nimbusds.jose.Algorithm;
+import org.springframework.stereotype.Service;
 
 import com.auth0.jwt.JWT;
 import com.auth0.jwt.algorithms.Algorithm;
-import com.project.large.member.entity.Member;
-import com.project.large.member.repository.MemberRepository;
+
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Value;
@@ -60,22 +62,11 @@ public class JwtService {
     private final MemberRepository memberRepository;
 
     public String createAccessToken(Member member) {
-        return JWT.create()
-                .withSubject(ACCESS_TOKEN_SUBJECT)
-                .withExpiresAt(new Date(System.currentTimeMillis() + accessTokenValidityInSeconds * 1000))
-                .withClaim(ID, member.getId())
-                .withClaim(GITID, member.getGitID())
-                .sign(Algorithm.HMAC512(secret));
-
+        return "";
     }
 
     public String createRefreshToken() {
-
-
-        return JWT.create()
-                .withSubject(REFRESH_TOKEN_SUBJECT)
-                .withExpiresAt(new Date(System.currentTimeMillis() + refreshTokenValidityInSeconds * 1000))
-                .sign(Algorithm.HMAC512(secret));
+        return "";
     }
 
     public void updateRefreshToken(String gitID, String refreshToken) {
@@ -86,13 +77,13 @@ public class JwtService {
                 );
     }
 
-    public void sendAccessAndRefreshToken(HttpServletResponse response, String accessToken, String refreshToken, String gitID) {
+    public void sendAccessAndRefreshToken(HttpServletResponse response, String accessToken, String refreshToken, String oauthId) {
         response.setStatus(HttpServletResponse.SC_OK);
 
         setAccessTokenHeader(response, accessToken);
         setRefreshTokenHeader(response, refreshToken);
 
-        Optional<Member> member = memberRepository.findByGitID(gitID);
+        Optional<Member> member = memberRepository.findByOauthId(oauthId);
 
         Map<String, String> tokenMap = new HashMap<>();
         tokenMap.put(ACCESS_TOKEN_SUBJECT, accessToken);

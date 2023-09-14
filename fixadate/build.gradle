@@ -28,7 +28,6 @@ dependencies {
 
 
 	implementation "org.springframework.boot:spring-boot-starter-security"
-//	implementation 'com.nimbusds:nimbus-jose-jwt:9.3'
 	implementation group: 'org.springframework.security', name: 'spring-security-oauth2-client'
 
 	compileOnly 'org.projectlombok:lombok'
