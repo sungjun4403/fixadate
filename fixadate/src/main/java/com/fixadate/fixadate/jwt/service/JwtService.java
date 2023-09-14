@@ -11,8 +11,8 @@ import java.util.Optional;
 import com.nimbusds.jose.Algorithm;
 import org.springframework.stereotype.Service;
 
-import com.auth0.jwt.JWT;
-import com.auth0.jwt.algorithms.Algorithm;
+//import com.auth0.jwt.JWT;
+//import com.auth0.jwt.algorithms.Algorithm;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -38,14 +38,14 @@ import jakarta.servlet.http.HttpServletResponse;
 @Transactional
 public class JwtService {
 
-    @Value("${jwt.secret}")
-    private String secret;
-
-    @Value("${jwt.access.expiration}")
-    private long accessTokenValidityInSeconds;
-
-    @Value("${jwt.refresh.expiration}")
-    private long refreshTokenValidityInSeconds;
+//    @Value("${jwt.secret}")
+//    private String secret;
+//
+//    @Value("${jwt.access.expiration}")
+//    private long accessTokenValidityInSeconds;
+//
+//    @Value("${jwt.refresh.expiration}")
+//    private long refreshTokenValidityInSeconds;
 
     @Value("${jwt.access.header}")
     private String accessHeader;
@@ -61,22 +61,27 @@ public class JwtService {
 
     private final MemberRepository memberRepository;
 
+    //Custom
     public String createAccessToken(Member member) {
         return "";
     }
 
+    //Custom
     public String createRefreshToken() {
         return "";
     }
 
-    public void updateRefreshToken(String gitID, String refreshToken) {
-        memberRepository.findByGitID(gitID)
-                .ifPresentOrElse(
-                        member -> member.updateRefreshToken(refreshToken),
-                        () -> new Exception("회원이 없습니다")
-                );
+    //Custom
+    public void updateRefreshToken(String oauthId, String refreshToken, String oauthPlatform) {
+
+//        memberRepository.findByGitID(gitID)
+//                .ifPresentOrElse(
+//                        member -> member.updateRefreshToken(refreshToken),
+//                        () -> new Exception("회원이 없습니다")
+//                );
     }
 
+    //Custom
     public void sendAccessAndRefreshToken(HttpServletResponse response, String accessToken, String refreshToken, String oauthId) {
         response.setStatus(HttpServletResponse.SC_OK);
 
@@ -90,6 +95,7 @@ public class JwtService {
         tokenMap.put(REFRESH_TOKEN_SUBJECT, refreshToken);
     }
 
+    //Custom
     public void sendAccessToken(HttpServletResponse response, String accessToken) {
         response.setStatus(HttpServletResponse.SC_OK);
 
@@ -99,26 +105,30 @@ public class JwtService {
         tokenMap.put(ACCESS_TOKEN_SUBJECT, accessToken);
     }
 
+    //Custom
     public Optional<String> extractAccessToken(HttpServletRequest request) {
         return Optional.ofNullable(request.getHeader(accessHeader)).filter(
                 accessToken -> accessToken.startsWith(BEARER)
         ).map(accessToken -> accessToken.replace(BEARER, ""));
     }
 
+    //Custom
     public Optional<String> extractRefreshToken(HttpServletRequest request) {
         return Optional.ofNullable(request.getHeader(refreshHeader)).filter(
                 refreshToken -> refreshToken.startsWith(BEARER)
         ).map(refreshToken -> refreshToken.replace(BEARER, ""));
     }
 
-    public Optional<String> extractGitID(String accessToken) {
-        try {
-            return Optional.ofNullable(JWT.require(Algorithm.HMAC512(secret)).build().verify(accessToken).getClaim(GITID).asString());
-        }
-        catch (Exception e) {
-            log.error(e.getMessage());
-            return Optional.empty();
-        }
+    //Custom
+    public Optional<String> extractOauthId(String accessToken) {
+//        try {
+//            return Optional.ofNullable(JWT.require(Algorithm.HMAC512(secret)).build().verify(accessToken).getClaim(GITID).asString());
+//        }
+//        catch (Exception e) {
+//            log.error(e.getMessage());
+//            return Optional.empty();
+//        }
+        return "".describeConstable();
     }
 
     public void setAccessTokenHeader(HttpServletResponse response, String accessToken) {
@@ -129,13 +139,15 @@ public class JwtService {
         response.setHeader(refreshHeader, refreshToken);
     }
 
+    //Custom
     public boolean isTokenValid(String token) {
-        try {
-            JWT.require(Algorithm.HMAC512(secret)).build().verify(token);
-            return true;
-        } catch (Exception e) {
-            return false;
-        }
+//        try {
+//            JWT.require(Algorithm.HMAC512(secret)).build().verify(token);
+//            return true;
+//        } catch (Exception e) {
+//            return false;
+//        }
+        return true;
     }
 }
 
