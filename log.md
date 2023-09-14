@@ -269,3 +269,12 @@ typ=JWT
 - figma 디자인을 flutter로 옮기는 법도 찾았다. 야호!
 - 진짜 야호! 개발 로그 작성하면서 CORS issue 해결했다! 역시 official document는 틀리지 않아
 - 
+
+<br/>
+
+* * * *
+
+<h3>12. jwt request filter</h3>
+2023/09/13 ~ <br/>
+
+- 
