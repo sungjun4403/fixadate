@@ -8,8 +8,12 @@ import com.fixadate.fixadate.Login.dto.naver.NaverInfoResponse;
 import com.fixadate.fixadate.Login.dto.naver.NaverTokenResponse;
 import com.fixadate.fixadate.Login.service.LoginService;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
+import lombok.extern.slf4j.XSlf4j;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.logging.Level;
 
 @RequiredArgsConstructor
 @RestController
