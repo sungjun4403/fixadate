@@ -274,8 +274,10 @@ typ=JWT
 
 * * * *
 
-<h3>12. jwt request filter</h3>
+<h3>12. jwt design</h3>
 2023/09/13 ~ <br/>
+
+- jwt service -> jwt request filter -> jwt exception filter
 
 <br/>
 
@@ -294,3 +296,13 @@ typ=JWT
 - 해결했던 Cors 이슈가 재발. 정확하게는 403에러. 전후과정은 고사하고 원인 결과 먼저 생각해보면 narrow 했던 authorizeHttpRequest일듯 싶음. spring security configure 후 h2 console이 사용이 불가능해져 authorizeHttpRequest에 h2 console 주소를 exception으로 두었는데 그 때문에 h2 console만 요청 접근이 가능했음.
 - ~~spring security mthfuxker~~
 
+<br/>
+  
+* * * *
+
+<h3>14. jwt service</h3>
+2023/09/13 ~ <br/>
+
+
+
+<br/>
