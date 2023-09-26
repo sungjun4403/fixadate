@@ -28,10 +28,8 @@ public class SecurityConfig {
         http.cors();
 
         http.authorizeHttpRequests().anyRequest().permitAll();
-        http.headers(headers -> headers.frameOptions().disable()) // deprecated for spring security 7.0 (available for now)
-            .csrf(csrf -> csrf
-                    .ignoringRequestMatchers(AntPathRequestMatcher.antMatcher("/h2-console/**")));
-
+        http.headers(headers -> headers.frameOptions().disable()); // deprecated for spring security 7.0 (available for now)
+        http.csrf().disable();
         return http.build();
     }
 
