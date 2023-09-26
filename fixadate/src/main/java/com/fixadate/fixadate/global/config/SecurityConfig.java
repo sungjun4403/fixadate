@@ -23,32 +23,16 @@ import static org.springframework.security.config.Customizer.withDefaults;
 @RequiredArgsConstructor
 public class SecurityConfig {
 
-//    @Bean
-//    public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
-//        http
-////                .cors(cors -> cors.disable())
-////                .cors(withDefaults()).cors()
-//
-//                .authorizeHttpRequests(auth -> auth
-//                        .requestMatchers(AntPathRequestMatcher.antMatcher("/h2-console/**")).permitAll()
-//                )
-//                .headers(headers -> headers.frameOptions().disable()) // deprecated for spring security 7.0 (available for now)
-//                .csrf(csrf -> csrf
-//                        .ignoringRequestMatchers(AntPathRequestMatcher.antMatcher("/h2-console/**")));
-//
-//        return http.build();
-//    }
+    @Bean
+    public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
+        http.cors();
 
-//    @Bean
-//    public CorsFilter corsFilter() {
-//        UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
-//        CorsConfiguration config = new CorsConfiguration();
-//        config.setAllowCredentials(true);
-//        config.addAllowedOriginPattern("*");
-//        config.addAllowedHeader("*");
-//        config.addExposedHeader("*");
-//        config.addAllowedMethod("*");
-//        source.registerCorsConfiguration("/**", config);
-//        return new CorsFilter(source);
-//    }
+        http.authorizeHttpRequests().anyRequest().permitAll();
+        http.headers(headers -> headers.frameOptions().disable()) // deprecated for spring security 7.0 (available for now)
+            .csrf(csrf -> csrf
+                    .ignoringRequestMatchers(AntPathRequestMatcher.antMatcher("/h2-console/**")));
+
+        return http.build();
+    }
+
 }
