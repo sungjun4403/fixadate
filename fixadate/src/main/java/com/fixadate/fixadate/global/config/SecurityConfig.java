@@ -13,34 +13,42 @@ import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 import org.springframework.web.cors.CorsConfiguration;
 import org.springframework.web.cors.CorsConfigurationSource;
 import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
+import org.springframework.web.filter.CorsFilter;
+
 import java.util.Arrays;
 import static org.springframework.security.config.Customizer.withDefaults;
 
 @Configuration
-@EnableWebSecurity
+//@EnableWebSecurity
 @RequiredArgsConstructor
 public class SecurityConfig {
-    @Bean
-    public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
-        http
-                .cors(withDefaults())
-                .authorizeHttpRequests(auth -> auth
-                        .requestMatchers(AntPathRequestMatcher.antMatcher("/h2-console/**")).permitAll()
-                )
-                .headers(headers -> headers.frameOptions().disable()) // deprecated for spring security 7.0 (available for now)
-                .csrf(csrf -> csrf
-                        .ignoringRequestMatchers(AntPathRequestMatcher.antMatcher("/h2-console/**")));
 
-        return http.build();
-    }
+//    @Bean
+//    public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
+//        http
+////                .cors(cors -> cors.disable())
+////                .cors(withDefaults()).cors()
+//
+//                .authorizeHttpRequests(auth -> auth
+//                        .requestMatchers(AntPathRequestMatcher.antMatcher("/h2-console/**")).permitAll()
+//                )
+//                .headers(headers -> headers.frameOptions().disable()) // deprecated for spring security 7.0 (available for now)
+//                .csrf(csrf -> csrf
+//                        .ignoringRequestMatchers(AntPathRequestMatcher.antMatcher("/h2-console/**")));
+//
+//        return http.build();
+//    }
 
-    @Bean
-    CorsConfigurationSource corsConfigurationSource() {
-        CorsConfiguration configuration = new CorsConfiguration();
-        configuration.setAllowedOrigins(Arrays.asList("http://localhost:3000"));
-        configuration.setAllowedMethods(Arrays.asList("GET","POST", "DELETE", "PATCH"));
-        UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
-        source.registerCorsConfiguration("/**", configuration);
-        return source;
-    }
+//    @Bean
+//    public CorsFilter corsFilter() {
+//        UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
+//        CorsConfiguration config = new CorsConfiguration();
+//        config.setAllowCredentials(true);
+//        config.addAllowedOriginPattern("*");
+//        config.addAllowedHeader("*");
+//        config.addExposedHeader("*");
+//        config.addAllowedMethod("*");
+//        source.registerCorsConfiguration("/**", config);
+//        return new CorsFilter(source);
+//    }
 }
