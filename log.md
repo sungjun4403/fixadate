@@ -303,6 +303,16 @@ typ=JWT
 <h3>14. jwt service</h3>
 2023/09/13 ~ <br/>
 
+google 먼저
 
+- doFilterInternal
+
+1. createAccessToken
+2. createRefreshToken
+3. saveAuthentication
+4. checkAccessTokenAndAuthentication
+5. sendAccessToken
+6. extractAccessToken
+7. checkRefreshTokenAndReIssueAccessToken
 
 <br/>
