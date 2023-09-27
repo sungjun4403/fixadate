@@ -77,3 +77,5 @@ jwt:
     refresh:
 #        expiration: 1209600
         header: Authorization-refresh
+
+NO_CHECK_URL: "/login"

@@ -4,7 +4,13 @@
     <option name="autoReloadType" value="NONE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="f45ee04d-73dc-419c-88cf-089010e2d337" name="Changes" comment="" />
+    <list default="true" id="f45ee04d-73dc-419c-88cf-089010e2d337" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/../fixadate/src/main/java/com/fixadate/fixadate/jwt/CustomAuthenticationEntryPoint.java" beforeDir="false" afterPath="$PROJECT_DIR$/../fixadate/src/main/java/com/fixadate/fixadate/jwt/CustomAuthenticationEntryPoint.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../fixadate/src/main/java/com/fixadate/fixadate/jwt/filter/JwtRequestFilter.java" beforeDir="false" afterPath="$PROJECT_DIR$/../fixadate/src/main/java/com/fixadate/fixadate/jwt/filter/JwtRequestFilter.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../fixadate/src/main/java/com/fixadate/fixadate/jwt/service/JwtService.java" beforeDir="false" afterPath="$PROJECT_DIR$/../fixadate/src/main/java/com/fixadate/fixadate/jwt/service/JwtService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../fixadate/src/main/resources/application.yml" beforeDir="false" afterPath="$PROJECT_DIR$/../fixadate/src/main/resources/application.yml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />

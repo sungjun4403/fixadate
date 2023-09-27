@@ -7,6 +7,7 @@ import com.fixadate.fixadate.Login.dto.kakao.KakaoTokenResponse;
 import com.fixadate.fixadate.Login.dto.naver.NaverInfoResponse;
 import com.fixadate.fixadate.Login.dto.naver.NaverTokenResponse;
 import com.fixadate.fixadate.Login.service.LoginService;
+import com.fixadate.fixadate.member.service.MemberService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import lombok.extern.slf4j.XSlf4j;
@@ -20,6 +21,7 @@ import java.util.logging.Level;
 @CrossOrigin("*")
 public class LoginController {
     private final LoginService loginService;
+    private final MemberService memberService;
     @Value("${google.client.id}")
     private String googleClientId;
     @Value("${google.client.pw}")
@@ -70,10 +72,12 @@ public class LoginController {
         GoogleResponse googleTokenResponse = loginService.googleIssueTokens(authCode);
 
         GoogleInfResponse googleInfoResponse = loginService.googleGetUserInfo(googleTokenResponse);
-
-        String email = googleInfoResponse.getEmail();
-
-        return email;
+        System.out.println(googleInfoResponse);
+        System.out.println(googleTokenResponse);
+        // send name, refreshToken, oauthId, oauthPlatform, profileImg, nickname, birth, gender, profession, signatureColor
+        // fill blank
+        // sign in at "/member" "POST"
+        return "";
     }
 
     @GetMapping("/api/naver/login")

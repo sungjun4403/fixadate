@@ -3,11 +3,12 @@
 //import java.io.IOException;
 //
 //import com.fixadate.fixadate.jwt.service.JwtService;
-//import com.project.large.member.entity.Member;
+//
 //
 //import com.fixadate.fixadate.member.repository.MemberRepository;
 //
 //import lombok.RequiredArgsConstructor;
+//import org.springframework.beans.factory.annotation.Value;
 //import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 //import org.springframework.security.core.Authentication;
 //import org.springframework.security.core.authority.mapping.GrantedAuthoritiesMapper;
@@ -31,7 +32,8 @@
 //
 //    private GrantedAuthoritiesMapper authoritiesMapper = new NullAuthoritiesMapper();
 //
-//    private final String NO_CHECK_URL = "/auth/github/callback";
+//    @Value("${NO_CHECK_URL}")
+//    private final String NO_CHECK_URL;
 //
 //
 //    @Override
@@ -82,10 +84,7 @@
 //        SecurityContextHolder.setContext(context);
 //    }
 //
-//    private void checkRefreshTokenAndReIssueAccessToken(HttpServletResponse response, String refreshToken) {
-//        memberRepository.findByRefreshToken(refreshToken).ifPresent(
-//                member -> jwtService.sendAccessToken(response, jwtService.createAccessToken(member))
-//        );
+//    private voidA
 //    }
 //
 //}
