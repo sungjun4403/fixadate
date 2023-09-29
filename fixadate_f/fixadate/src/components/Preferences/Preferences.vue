@@ -1,7 +1,8 @@
 <template>
     <div>
-        PREFE
-        <button @click="axioss();">AXIOS</button>
+        <br>
+
+        <button @click="oauthLogout();">LOGOUT</button>
     </div>
 </template>
 
@@ -13,13 +14,16 @@ export default {
     },
 
     methods: {
-        axioss() {
-            
+        oauthLogout() {
+            if (localStorage.oauthPlatform == "kakao") {
+                this.kakaoLogout()
+            }
+        },
+
+        kakaoLogout() {
             axios({
-                url: 'http://localhost:8080/member/1',
-                method: 'get'
-            }).then((response)=> {
-                console.log(response)
+                url: "",
+                method: "post"
             })
         }
     }

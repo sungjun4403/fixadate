@@ -46,6 +46,7 @@
 
 <script>
 import axios from 'axios'
+import router from '../../router'
 
 export default {
     name: "InfoInput",
@@ -56,10 +57,13 @@ export default {
     beforeMount() {
         localStorage.setItem("oauthPlatform", this.oauthPlatform)
         localStorage.setItem("AccessToken", this.AccessToken)
+        localStorage.setItem("OauthId", this.oauthId)
     }, 
 
     mounted() {
         this.fillInfo()
+        console.log(this.AccessToken)
+        console.log(this.RefreshToken)
     },
 
     methods: {
@@ -117,6 +121,7 @@ export default {
                 }
             }).then((response) => {
                 console.log(response)
+                router.push("/")
             })
         }
     }

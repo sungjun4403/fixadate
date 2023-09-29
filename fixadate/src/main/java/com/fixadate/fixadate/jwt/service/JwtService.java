@@ -1,5 +1,6 @@
 package com.fixadate.fixadate.jwt.service;
 
+import com.fixadate.fixadate.Login.controller.AuthController;
 import com.fixadate.fixadate.member.entity.Member;
 import com.fixadate.fixadate.member.repository.MemberRepository;
 
@@ -57,7 +58,6 @@ public class JwtService {
     private static final String REFRESH_TOKEN_SUBJECT = "RefreshToken";
     private static final String ID = "UserCode";
     private static final String BEARER = "Bearer ";
-
 
     private final MemberRepository memberRepository;
 
@@ -133,14 +133,16 @@ public class JwtService {
     }
 
     //Custom
-    public Optional<String> extractOauthId(String accessToken) {
-//        try {
-//            return Optional.ofNullable(JWT.require(Algorithm.HMAC512(secret)).build().verify(accessToken).getClaim(GITID).asString());
-//        }
-//        catch (Exception e) {
-//            log.error(e.getMessage());
-//            return Optional.empty();
-//        }
+    public Optional<String> extractOauthId(String accessToken, String oauthPlatform) {
+        try {
+            switch (oauthPlatform) {
+                case "kakao": return "oauthId extracted from kakao ID".describeConstable();
+            }
+        }
+        catch (Exception e) {
+            log.error(e.getMessage());
+            return Optional.empty();
+        }
         return "".describeConstable();
     }
 

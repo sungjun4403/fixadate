@@ -26,7 +26,6 @@ import java.util.Map;
 @Service
 @Transactional
 @RequiredArgsConstructor
-@CrossOrigin("*")
 public class LoginService {
     @Value("${google.client.id}")
     private String googleClientId;
