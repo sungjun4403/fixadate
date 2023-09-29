@@ -31,10 +31,7 @@ public class JwtRequestFilter extends OncePerRequestFilter {
     private final MemberRepository memberRepository;
     private final JwtService jwtService;
     private GrantedAuthoritiesMapper authoritiesMapper = new NullAuthoritiesMapper();
-
-    @Value("${NO_CHECK_URL}")
-    private final String NO_CHECK_URL;
-
+    private String NO_CHECK_URL = "/login";
 
     @Override
     protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain) throws ServletException, IOException {
@@ -58,6 +55,7 @@ public class JwtRequestFilter extends OncePerRequestFilter {
 
     public String getOauthPlatformFromRequest(HttpServletRequest request) {
         System.out.println(request.getHeader("oauthPlatform"));
+        System.out.println("none");
         return "";
     }
 
