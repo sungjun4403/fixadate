@@ -6,6 +6,8 @@
 
 <script>
 import axios from 'axios'
+import router from '../../router'
+
 export default {
     setup() {
         
@@ -27,7 +29,20 @@ export default {
                 method: "get"
             }).then((response) => {
                 console.log(response.data)
-                this.$router.push("/")
+                router.push({
+                    name: "InfoInput",
+                    params: {
+                        oauthPlatform: "kakao",
+                        oauthId: response.data.id,
+                        name: null,
+                        gender: response.data.kakao_account.gender,
+                        profileImg: response.data.properties.profile_image,
+                        birth: response.data.kakao_account.birthday,
+                        AccessToken: response.data.kakaoTokenResponse.access_token,
+                        RefreshToken: response.data.kakaoTokenResponse.refresh_token
+                        
+                    }
+                })
             })
         }
     }
