@@ -27,6 +27,7 @@ export default {
                 method: "get"
             }).then((response) => {
                 console.log(response.data)
+                this.$router.push("/")
             })
         }
     }

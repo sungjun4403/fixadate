@@ -7,6 +7,11 @@ import com.fixadate.fixadate.member.service.MemberService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 
+// SIGN UP FLOW CHART
+// 1. LOGIN WITH OAUTH
+// 2. PASS OAUTH INFO (N TOKENS) TO INPUT PAGE
+// 3. SIGN IN (CREATE MEMBER)
+
 @RequiredArgsConstructor
 @RestController
 public class MemberController {
