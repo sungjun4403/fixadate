@@ -1,5 +1,6 @@
 package com.fixadate.fixadate.member.controller;
 
+import com.fixadate.fixadate.global.utils.SecurityUtil;
 import com.fixadate.fixadate.member.dto.MemberCreate;
 import com.fixadate.fixadate.member.dto.MemberEdit;
 import com.fixadate.fixadate.member.dto.MemberResponse;
@@ -26,6 +27,7 @@ public class MemberController {
     //CREATE
     @PostMapping("/member")
     public void create (@RequestBody MemberCreate memberCreate) {
+        System.out.println(SecurityUtil.getLoginedUserOauthId());
         memberService.create(memberCreate);
     }
 

@@ -38,7 +38,6 @@ import jakarta.servlet.http.HttpServletResponse;
 @Slf4j
 @Transactional
 public class JwtService {
-
 //    @Value("${jwt.secret}")
 //    private String secret;
 //
@@ -47,13 +46,10 @@ public class JwtService {
 //
 //    @Value("${jwt.refresh.expiration}")
 //    private long refreshTokenValidityInSeconds;
-
     @Value("${jwt.access.header}")
     private String accessHeader;
-
     @Value("${jwt.refresh.header}")
     private String refreshHeader;
-
     private static final String ACCESS_TOKEN_SUBJECT = "AccessToken";
     private static final String REFRESH_TOKEN_SUBJECT = "RefreshToken";
     private static final String ID = "UserCode";
@@ -61,7 +57,6 @@ public class JwtService {
 
     private final MemberRepository memberRepository;
 
-    public String createAccessToken(Member member) {return "";}
 
     //Custom
     public String getAccessToken(Member member) {
@@ -74,10 +69,9 @@ public class JwtService {
                 System.out.println("akakako~");
             case "apple":
                 System.out.println("naver~");
-
+            default:
+                return "";
         }
-
-        return "";
     }
 
     //Custom
