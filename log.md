@@ -301,7 +301,7 @@ typ=JWT
 * * * *
 
 <h3>14. jwt service</h3>
-2023/09/13 ~ <br/>
+2023/09/13 ~ 2023/09/22<br/>
 
 google 먼저
 
@@ -312,6 +312,26 @@ google 먼저
 3. saveAuthentication
 4. checkAccessTokenAndAuthentication
 5. sendAccessToken
+6. extractAccessToken
+7. checkRefreshTokenAndReIssueAccessToken
+
+<br/>
+  
+* * * *
+
+<h3>15. jwt service</h3>
+2023/09/22 ~ 2023/09/29<br/>
+
+~~google 먼저~~ -> kakao 먼저 (이미 누가 해놨더라고)
+
+- doFilterInternal
+  - 이건 뭐 코드 그대로 쓰면 되고
+
+1. createAccessToken - 이건 뭐 만드는게 아니라 가져오는 거니까 전달만 잘 하면 됨 (method 자체가 필요 없음)
+2. createRefreshToken - 위랑 2222
+3. saveAuthentication - 이건 조금만 바꾸면 되고 gitId -> oauthId
+4. checkAccessTokenAndAuthentication - 이건 switch문으로 각 플랫폼 별로 확인 해야됨
+5. sendAccessToken - 이건 
 6. extractAccessToken
 7. checkRefreshTokenAndReIssueAccessToken
 
