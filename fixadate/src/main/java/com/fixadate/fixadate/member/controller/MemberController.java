@@ -1,10 +1,13 @@
 package com.fixadate.fixadate.member.controller;
 
+import com.fixadate.fixadate.Login.dto.kakao.KakaoTokenIfValid;
+import com.fixadate.fixadate.Login.service.AuthService;
 import com.fixadate.fixadate.global.utils.SecurityUtil;
 import com.fixadate.fixadate.member.dto.MemberCreate;
 import com.fixadate.fixadate.member.dto.MemberEdit;
 import com.fixadate.fixadate.member.dto.MemberResponse;
 import com.fixadate.fixadate.member.service.MemberService;
+import jakarta.servlet.http.HttpServletRequest;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 
@@ -17,6 +20,7 @@ import org.springframework.web.bind.annotation.*;
 @RestController
 public class MemberController {
     private final MemberService memberService;
+    private final AuthService authService;
 
     //VIEW ONE
     @GetMapping("/member/{memberId}")
@@ -26,11 +30,31 @@ public class MemberController {
 
     //CREATE
     @PostMapping("/member")
-    public void create (@RequestBody MemberCreate memberCreate) {
-        System.out.println(SecurityUtil.getLoginedUserOauthId());
+    public void create (@RequestBody MemberCreate memberCreate, HttpServletRequest request) throws IllegalStateException {
         // check if user token is valid -> if true run function
         // exceptional authentication situation
-        memberService.create(memberCreate);
+        // gotta check if token is valid before its owner's member db is pushed
+        String accessToken = request.getHeader("Authorization").split(" ")[1];
+        String oauthPlatform = request.getHeader("oauthPlatform");
+        String oauthIdFromToken = null;
+
+        switch (oauthPlatform) {
+            case "kakao":
+                KakaoTokenIfValid kakaoTokenIfValid = authService.KakaoTokenIfValid(accessToken);
+                oauthIdFromToken = kakaoTokenIfValid.getId();
+            case "google":
+            case "naver":
+            case "apple":
+        }
+
+
+        if (memberCreate.getOauthId().equals(oauthIdFromToken)) {
+            memberService.create(memberCreate);
+        }
+        else {
+            IllegalStateException illegalStateException = new IllegalStateException("Invalid AccessToken");
+            throw illegalStateException;
+        }
     }
 
     //EDIT

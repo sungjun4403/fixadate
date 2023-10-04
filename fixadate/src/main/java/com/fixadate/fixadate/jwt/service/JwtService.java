@@ -156,7 +156,7 @@ public class JwtService {
     }
 
     //Custom
-    public boolean isTokenValid(String token) {
+    public boolean isTokenValid(String token, String oauthPlatform) {
 //        try {
 //            JWT.require(Algorithm.HMAC512(secret)).build().verify(token);
 //            return true;

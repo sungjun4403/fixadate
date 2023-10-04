@@ -40,12 +40,9 @@ public class JwtRequestFilter extends OncePerRequestFilter {
             return;
         }
         String oauthPlatform = getOauthPlatformFromRequest(request);
-        System.out.println("oauthPlatform:" + oauthPlatform);
-        System.out.println("oauthPlatform:" + oauthPlatform);
-        System.out.println("oauthPlatform:" + oauthPlatform);
         String refreshToken = jwtService
                 .extractRefreshToken(request)
-                .filter(jwtService::isTokenValid)
+                .filter(token -> jwtService.isTokenValid(token, oauthPlatform))
                 .orElse(null);
 
 //        if (refreshToken != null) {
