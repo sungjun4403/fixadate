@@ -1,6 +1,7 @@
 package com.fixadate.fixadate.jwt.service;
 
 import com.fixadate.fixadate.Login.controller.AuthController;
+import com.fixadate.fixadate.Login.service.AuthService;
 import com.fixadate.fixadate.member.entity.Member;
 import com.fixadate.fixadate.member.repository.MemberRepository;
 
@@ -32,6 +33,8 @@ import org.springframework.transaction.annotation.Transactional;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 
+import javax.swing.text.html.Option;
+
 
 @Service
 @RequiredArgsConstructor
@@ -56,13 +59,14 @@ public class JwtService {
     private static final String BEARER = "Bearer ";
 
     private final MemberRepository memberRepository;
+    private final AuthService authService;
 
 
     //Custom
     public String getAccessToken(Member member) {
         switch (member.getOauthPlatform()) {
             case "google":
-
+                System.out.println("google~");
             case "naver":
                 System.out.println("naver~");
             case "kakao":
@@ -128,9 +132,12 @@ public class JwtService {
 
     //Custom
     public Optional<String> extractOauthId(String accessToken, String oauthPlatform) {
+
         try {
             switch (oauthPlatform) {
-                case "kakao": return "oauthId extracted from kakao ID".describeConstable();
+                case "kakao":
+                    String oauthId = authService.KakaoTokenIfValid(accessToken).getId();
+                    return Optional.ofNullable(oauthId);
             }
         }
         catch (Exception e) {

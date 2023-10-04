@@ -16,15 +16,13 @@ import org.springframework.web.client.RestTemplate;
 @Transactional
 @RequiredArgsConstructor
 public class AuthService {
-    public Boolean KakaoTokenIfValid(String accessToken) {
+    public KakaoTokenIfValid KakaoTokenIfValid(String accessToken) {
         RestTemplate restTemplate = new RestTemplate();
 
         HttpHeaders headers = new HttpHeaders();
         headers.set("Authorization", "Bearer "+ accessToken);
         HttpEntity<Object> httpEntity = new HttpEntity<>(headers);
         ResponseEntity<KakaoTokenIfValid> kakaoTokenIfValid = restTemplate.exchange("https://kapi.kakao.com/v1/user/access_token_info", HttpMethod.GET, httpEntity, KakaoTokenIfValid.class);
-        System.out.println(kakaoTokenIfValid);
-        System.out.println(kakaoTokenIfValid.getBody());
-        return true;
+        return kakaoTokenIfValid.getBody();
     }
 }

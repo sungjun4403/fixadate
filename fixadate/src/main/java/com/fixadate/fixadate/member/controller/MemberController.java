@@ -28,6 +28,8 @@ public class MemberController {
     @PostMapping("/member")
     public void create (@RequestBody MemberCreate memberCreate) {
         System.out.println(SecurityUtil.getLoginedUserOauthId());
+        // check if user token is valid -> if true run function
+        // exceptional authentication situation
         memberService.create(memberCreate);
     }
 

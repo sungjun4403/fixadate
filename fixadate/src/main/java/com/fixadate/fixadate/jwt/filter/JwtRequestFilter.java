@@ -40,6 +40,9 @@ public class JwtRequestFilter extends OncePerRequestFilter {
             return;
         }
         String oauthPlatform = getOauthPlatformFromRequest(request);
+        System.out.println("oauthPlatform:" + oauthPlatform);
+        System.out.println("oauthPlatform:" + oauthPlatform);
+        System.out.println("oauthPlatform:" + oauthPlatform);
         String refreshToken = jwtService
                 .extractRefreshToken(request)
                 .filter(jwtService::isTokenValid)
@@ -54,21 +57,19 @@ public class JwtRequestFilter extends OncePerRequestFilter {
     }
 
     public String getOauthPlatformFromRequest(HttpServletRequest request) {
-        System.out.println(request.getHeader("oauthPlatform"));
-        System.out.println("none");
-        return "";
+        return request.getHeader("oauthPlatform");
     }
 
     private void checkAccessTokenAndAuthentication(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain, String oauthPlatform) throws ServletException, IOException {
-        jwtService.extractAccessToken(request).filter(jwtService::isTokenValid).ifPresent(
-
+        jwtService.extractAccessToken(request).ifPresent(
                 accessToken -> jwtService.extractOauthId(accessToken, oauthPlatform).ifPresent(
-                        oauthId -> memberRepository.findByOauthId(oauthId).ifPresent(
-                                this::saveAuthentication
-                        )
+                        oauthId -> {
+                            memberRepository.findByOauthId(oauthId).ifPresent(
+                                    this::saveAuthentication
+                            );
+                        }
                 )
         );
-
         filterChain.doFilter(request, response);
     }
 
@@ -79,8 +80,12 @@ public class JwtRequestFilter extends OncePerRequestFilter {
                 .roles("user")
                 .build();
 
-        Authentication authentication = new UsernamePasswordAuthenticationToken(user, null, authoritiesMapper.mapAuthorities(user.getAuthorities()));
+        System.out.println("USER");
+        System.out.println(user.getUsername());
 
+        Authentication authentication = new UsernamePasswordAuthenticationToken(user, null, authoritiesMapper.mapAuthorities(user.getAuthorities()));
+        System.out.println("authentication");
+//        System.out.println(authentication);
         SecurityContext context = SecurityContextHolder.createEmptyContext();
         context.setAuthentication(authentication);
         SecurityContextHolder.setContext(context);
