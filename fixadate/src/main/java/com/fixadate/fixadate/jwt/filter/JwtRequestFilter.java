@@ -9,7 +9,6 @@ import com.fixadate.fixadate.member.entity.Member;
 import com.fixadate.fixadate.member.repository.MemberRepository;
 
 import lombok.RequiredArgsConstructor;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.authority.mapping.GrantedAuthoritiesMapper;
@@ -79,6 +78,7 @@ public class JwtRequestFilter extends OncePerRequestFilter {
 
         System.out.println("USER");
         System.out.println(user.getUsername());
+        System.out.println(user);
 
         Authentication authentication = new UsernamePasswordAuthenticationToken(user, null, authoritiesMapper.mapAuthorities(user.getAuthorities()));
         System.out.println("authentication");
