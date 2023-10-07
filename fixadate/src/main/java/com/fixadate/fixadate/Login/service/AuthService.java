@@ -23,4 +23,7 @@ public class AuthService {
         ResponseEntity<KakaoTokenIfValid> kakaoTokenIfValid = restTemplate.exchange("https://kapi.kakao.com/v1/user/access_token_info", HttpMethod.GET, httpEntity, KakaoTokenIfValid.class);
         return kakaoTokenIfValid.getBody();
     }
+
+    public GoogleTokenIfValid
+
 }

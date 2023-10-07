@@ -58,13 +58,15 @@ public class JwtRequestFilter extends OncePerRequestFilter {
 
     private void checkAccessTokenAndAuthentication(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain, String oauthPlatform) throws ServletException, IOException {
         jwtService.extractAccessToken(request).ifPresent(
-                accessToken -> jwtService.extractOauthId(accessToken, oauthPlatform).ifPresent(
-                        oauthId -> {
-                            memberRepository.findByOauthId(oauthId).ifPresent(
-                                    this::saveAuthentication
-                            );
-                        }
-                )
+                accessToken -> {
+                    jwtService.extractOauthId(accessToken, oauthPlatform).ifPresent(
+                            oauthId -> {
+                                memberRepository.findByOauthId(oauthId).ifPresent(
+                                        member -> saveAuthentication(member)
+                                );
+                            }
+                    );
+                }
         );
         filterChain.doFilter(request, response);
     }
