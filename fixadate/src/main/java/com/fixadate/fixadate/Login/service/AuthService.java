@@ -24,6 +24,6 @@ public class AuthService {
         return kakaoTokenIfValid.getBody();
     }
 
-    public GoogleTokenIfValid
+//    public GoogleTokenIfValid
 
 }
