@@ -336,3 +336,27 @@ google 먼저
 7. checkRefreshTokenAndReIssueAccessToken
 
 <br/>
+  
+* * * *
+
+<h3>16. jwt request filter</h3>
+2023/09/30 ~ 2023/10/08<br/>
+
+- 진전 사항은 딱히 없지만 일단 써보는 개발 로그
+- 대강 토큰 발급하고 넘기는 건 되는데 문제가
+  
+~~~java
+
+String extractedGitID = SecurityUtil.getLoginedUserGitId();
+
+public static String getLoginedUserGitId() {
+    Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+    String name = authentication.getName();
+
+    return name;
+}
+
+~~~
+
+- 위 코드의 작동원리를 모르겠음. spring security를 사용하는 이유라고도 볼 수 있는 중요한 기능이라는데 이해가 안돼서 구현이 어려움. 몰라몰라
+
