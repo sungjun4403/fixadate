@@ -1,6 +1,7 @@
 package com.fixadate.fixadate.member.service;
 
 
+import com.fixadate.fixadate.jwt.filter.JwtRequestFilter;
 import com.fixadate.fixadate.member.dto.MemberCreate;
 import com.fixadate.fixadate.member.dto.MemberEdit;
 import com.fixadate.fixadate.member.dto.MemberEditor;
@@ -26,6 +27,7 @@ public class MemberService {
     private List<String> RandNickNouns;
 
     private final MemberRepository memberRepository;
+    private final JwtRequestFilter jwtRequestFilter;
 
     //CREATE MEMBER
     public void create(MemberCreate memberCreate) {

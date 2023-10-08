@@ -8,6 +8,7 @@ import AlertCentre from '../components/AlertCentre/AlertCentre.vue'
 import Home from '../components/Home/Home.vue'
 
 import Login from '../components/Login/Login.vue'
+import Redirect from '../components/Login/Redirect.vue'
 import GoogleAfterLogin from '../components/Login/GoogleAfterLogin.vue'
 import NaverAfterLogin from '../components/Login/NaverAfterLogin.vue'
 import AppleAfterLogin from '../components/Login/AppleAfterLogin.vue'
@@ -29,6 +30,7 @@ const routes= [
 
     //Login 
     { path: "/login", name: "Login", component: Login },
+    { path: "/redirect", name: "Redirect", component: Redirect }, 
     { path: "/googleafterlogin", name: "GoogleAfterLogin", component: GoogleAfterLogin, props: true}, 
     { path: "/naverafterlogin", name: "NaverAfterLogin", component: NaverAfterLogin, props: true},
     { path: "/appleafterlogin", name: "AppleAfterLogin", component: AppleAfterLogin, props: true},

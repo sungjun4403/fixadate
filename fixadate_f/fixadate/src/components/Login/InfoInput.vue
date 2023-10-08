@@ -121,7 +121,13 @@ export default {
                 }
             }).then((response) => {
                 console.log(response)
-                router.push("/")
+                if (response.status == 200) {
+                    router.push("/redirect")    
+                }
+                else {
+                    router.push("/404")
+                }
+                
             })
         }
     }
