@@ -5,9 +5,18 @@
 </template>
 
 <script>
+import axios from 'axios'
 export default {
-    setup() {
-        
+    mounted() {
+        axios({
+                url: "http://localhost:8080/getkakaologinurl",
+                method: "get"
+            }).then((response) => {
+                document.location.href = response.data
+            })   
     },
+    methods: {
+        saveAuthen
+    }
 }
 </script>
