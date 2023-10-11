@@ -32,6 +32,7 @@ public class JwtRequestFilter extends OncePerRequestFilter {
     private GrantedAuthoritiesMapper authoritiesMapper = new NullAuthoritiesMapper();
     private String NO_CHECK_URL = "/login";
 
+    //Required: AccessToken(Header), oauthPlatform(Header)
     @Override
     protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain) throws ServletException, IOException {
         if (request.getRequestURI().equals(NO_CHECK_URL)) {
@@ -39,10 +40,10 @@ public class JwtRequestFilter extends OncePerRequestFilter {
             return;
         }
         String oauthPlatform = getOauthPlatformFromRequest(request);
-        String refreshToken = jwtService
-                .extractRefreshToken(request)
-                .filter(token -> jwtService.isTokenValid(token, oauthPlatform))
-                .orElse(null);
+//        String refreshToken = jwtService
+//                .extractRefreshToken(request)
+//                .filter(token -> jwtService.isTokenValid(token, oauthPlatform))
+//                .orElse(null);
 
 //        if (refreshToken != null) {
 //            checkRefreshTokenAndReIssueAccessToken(response, refreshToken);

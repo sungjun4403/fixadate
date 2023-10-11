@@ -16,7 +16,11 @@ export default {
             })   
     },
     methods: {
-        saveAuthen
+        saveAuthentication() {
+            axios({
+                url: "http://localhost:8080/"
+            })
+        }
     }
 }
 </script>
