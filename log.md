@@ -365,7 +365,7 @@ public static String getLoginedUserGitId() {
   
 * * * *
 
-<h3>16. jwt request filter 대충 사용할 수 있을 정도로 완성 </h3>
+<h3>17. jwt request filter 대충 사용할 수 있을 정도로 완성 </h3>
 2023/09/30 ~ 2023/10/08<br/>
 
 - request에서 oauthPlatform, accessToken분리 후 oauthPlatform 케이스에 따라 각 링크 (api.kakao, api.google, etc.)로 토큰을 검증 받음 (일단 카카오만)
@@ -386,3 +386,4 @@ public static String getLoginedUserGitId() {
  - setRefreshTokenHeader
  - jwtExceptionFilter
  - Adate
+- 그래서 현재는 <code>String oauthId = jwtService.extractOauthId(jwtService.extractAccessToken(request).orElseThrow(), jwtService.extractOauthPlatform(request)).orElseThrow();</code>
