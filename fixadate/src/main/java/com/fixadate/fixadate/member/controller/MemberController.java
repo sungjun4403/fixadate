@@ -22,10 +22,18 @@ public class MemberController {
     private final MemberService memberService;
     private final AuthService authService;
 
-    //VIEW ONE
+    //VIEW ONE without authorities
     @GetMapping("/member/{memberId}")
     public MemberResponse get(@PathVariable Long memberId) {
         return memberService.get(memberId);
+    }
+
+    //VIEW ONE with authorities
+    @GetMapping("/member/withtoken")
+    public MemberResponse get(HttpServletRequest request) {
+        String accessToken = request.getHeader("Authorization").split(" ")[1];
+        String oauthPlatform= request.getHeader("oauthPlatform");
+        return memberService.getByAccessToken(accessToken, oauthPlatform);
     }
 
     //CREATE

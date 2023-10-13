@@ -2,6 +2,7 @@ package com.fixadate.fixadate.member.service;
 
 
 import com.fixadate.fixadate.jwt.filter.JwtRequestFilter;
+import com.fixadate.fixadate.jwt.service.JwtService;
 import com.fixadate.fixadate.member.dto.MemberCreate;
 import com.fixadate.fixadate.member.dto.MemberEdit;
 import com.fixadate.fixadate.member.dto.MemberEditor;
@@ -28,6 +29,7 @@ public class MemberService {
 
     private final MemberRepository memberRepository;
     private final JwtRequestFilter jwtRequestFilter;
+    private final JwtService jwtService;
 
     //CREATE MEMBER
     public void create(MemberCreate memberCreate) {
@@ -102,5 +104,14 @@ public class MemberService {
         Integer randint2 = (int) ((Math.random()) * 19 + 1);
 
         return RandNickAdjs.get(randint1).toString() + " " + RandNickNouns.get(randint2).toString();
+    }
+
+    public MemberResponse getByAccessToken(String accessToken, String oauthPlatform) {
+        String oauthId = jwtService.extractOauthId(accessToken, oauthPlatform).orElseThrow();
+        Member member = memberRepository.findByOauthId(oauthId).orElseThrow();
+        MemberResponse memberResponse = MemberResponse.builder().build();
+
+        return memberResponse;
+
     }
 }
