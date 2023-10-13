@@ -124,6 +124,7 @@ public class JwtService {
             switch (oauthPlatform) {
                 case "kakao":
                     String oauthId = authService.KakaoTokenIfValid(accessToken).getId();
+                    log.info("Encrypting AccessToken");
                     return Optional.ofNullable(oauthId);
             }
         }

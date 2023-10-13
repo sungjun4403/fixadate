@@ -15,6 +15,7 @@ import org.springframework.security.config.annotation.web.configuration.EnableWe
 import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
+import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 
 @Configuration
 @EnableWebSecurity
@@ -34,6 +35,10 @@ public class SecurityConfig extends SecurityConfigurerAdapter {
         http.sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS);
         http.formLogin().disable();
         http.httpBasic().disable();
+//        http.logout()
+//                .logoutUrl("/logout")
+//                .deleteCookies("JSESSIONID")
+//                .invalidateHttpSession(true);
         http.exceptionHandling().authenticationEntryPoint(new CustomAuthenticationEntryPoint());
 
 

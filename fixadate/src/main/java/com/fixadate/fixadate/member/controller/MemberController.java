@@ -41,7 +41,7 @@ public class MemberController {
             return memberService.get(oauthId);
         }
         else {
-            throw new IllegalStateException();
+            throw new IllegalStateException("Encryption failed");
         }
 
     }

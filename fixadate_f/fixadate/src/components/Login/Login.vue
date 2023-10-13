@@ -1,24 +1,20 @@
 <template>
-    <div>
+    <div id="Login">
         <div>
             <h2>SIGN IN</h2>
         </div>
 
-        <div>
-            <h2>SIGN UP</h2>
-        </div>
-
-        <button id="googleSignUpButton" @click="getGoogleLoginUrl()">
+        <button class="oauthButton" id="googleSignUpButton" @click="getGoogleLoginUrl()">
             Sign up with Google
         </button>
         <br><br>
 
-        <button  id="naverSignUpButton" @click="getNaverLoginUrl()">
+        <button class="oauthButton" id="naverSignUpButton" @click="getNaverLoginUrl()">
             Sign up with Naver
         </button>        
         <br><br>
 
-        <button id="kakaoSignUpButton" @click="getKakaoLoginUrl()">
+        <button class="oauthButton" id="kakaoSignUpButton" @click="getKakaoLoginUrl()">
             Sign up with Kakao
         </button>
            
@@ -65,6 +61,15 @@ export default {
 <style scoped>
     button {
         border: none;
+    }
+
+    .oauthButton {
+        width: 150px;
+        height: 35px;
+    }
+
+    #Login {
+        text-align: center;
     }
 
     #googleSignUpButton {

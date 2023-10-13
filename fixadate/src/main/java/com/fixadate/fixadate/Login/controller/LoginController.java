@@ -12,6 +12,7 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import lombok.extern.slf4j.XSlf4j;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.logging.Level;
@@ -103,9 +104,14 @@ public class LoginController {
         @RequestParam(value = "ifAccessToken") String ifAccessToken,
         @RequestParam(value = "ifRefreshToken") String ifRefreshToken) {
 
-
-
         return "";
+    }
+
+    @GetMapping("/logout")
+    public void logout(HttpSecurity http) throws Exception{
+        http.logout()
+                .deleteCookies("JSESSIONID")
+                .invalidateHttpSession(true);
     }
 }
 

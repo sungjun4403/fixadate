@@ -18,15 +18,21 @@ export default {
 
     methods: {
         oauthLogout() {
-            if (localStorage.oauthPlatform == "kakao") {
-                this.kakaoLogout()
-            }
-        },
-
-        kakaoLogout() {
             axios({
-                url: "",
-                method: "post"
+                url: "http://localhost:8080/logout",
+                method: "get",
+                headers: {
+                    'Authorization': 'Bearer ' + localStorage.AccessToken,
+                    'oauthPlatform': localStorage.oauthPlatform
+                }
+            }).then((response) => {
+                console.log(response)
+                // if (response.status == 200) {
+                //     router.push("/login")
+                // }
+                // else {
+                //     router.push("/404")
+                // }
             })
         },
         
