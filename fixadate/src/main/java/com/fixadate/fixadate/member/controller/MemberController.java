@@ -3,6 +3,7 @@ package com.fixadate.fixadate.member.controller;
 import com.fixadate.fixadate.Login.dto.kakao.KakaoTokenIfValid;
 import com.fixadate.fixadate.Login.service.AuthService;
 import com.fixadate.fixadate.global.utils.SecurityUtil;
+import com.fixadate.fixadate.jwt.service.JwtService;
 import com.fixadate.fixadate.member.dto.MemberCreate;
 import com.fixadate.fixadate.member.dto.MemberEdit;
 import com.fixadate.fixadate.member.dto.MemberResponse;
@@ -21,6 +22,7 @@ import org.springframework.web.bind.annotation.*;
 public class MemberController {
     private final MemberService memberService;
     private final AuthService authService;
+    private final JwtService jwtService;
 
     //VIEW ONE without authorities
     @GetMapping("/member/{oauthId}")
@@ -31,12 +33,17 @@ public class MemberController {
     //VIEW ONE with authorities
     @GetMapping("/member/withtoken")
     public MemberResponse get(HttpServletRequest request) {
-        if (SecurityUtil.getLoginedUserOauthId().equals()) {
+        String oauthId = jwtService.extractOauthId(jwtService.extractAccessToken(request).orElseThrow(), jwtService.extractOauthPlatform(request)).orElseThrow();
 
+        if (SecurityUtil.getLoginedUserOauthId().equals(oauthId)) {
+            String accessToken = request.getHeader("Authorization").split(" ")[1];
+            String oauthPlatform= request.getHeader("oauthPlatform");
+            return memberService.get(oauthId);
         }
-        String accessToken = request.getHeader("Authorization").split(" ")[1];
-        String oauthPlatform= request.getHeader("oauthPlatform");
-        return memberService.getByAccessToken(accessToken, oauthPlatform);
+        else {
+            throw new IllegalStateException();
+        }
+
     }
 
     //CREATE

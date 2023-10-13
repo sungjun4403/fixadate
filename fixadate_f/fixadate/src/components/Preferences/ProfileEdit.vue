@@ -1,6 +1,7 @@
 <template>
     <div>
-        edit profile
+        edit profile <br>
+
         {{name}} <br>
         {{oauthPlatform}} <br>
         {{profileImg}} <br>
