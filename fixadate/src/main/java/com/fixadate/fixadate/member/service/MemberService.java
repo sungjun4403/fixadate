@@ -83,8 +83,8 @@ public class MemberService {
         memberRepository.deleteById(memberId);
     }
 
-    public MemberResponse get(Long memberId) {
-        Member member = memberRepository.findById(memberId).orElseThrow();
+    public MemberResponse get(String oauthId) {
+        Member member = memberRepository.findByOauthId(oauthId).orElseThrow();
         return MemberResponse.builder()
                 .id(member.getId())
                 .name(member.getName())

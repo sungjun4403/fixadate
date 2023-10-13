@@ -2,12 +2,15 @@
     <div>
         <br>
 
-        <button @click="oauthLogout();">LOGOUT</button>
+        <button @click="oauthLogout();">LOGOUT</button> <br><br>
+
+        <button @click="moveToProfileEdit();">Edit Profile</button>
     </div>
 </template>
 
 <script>
 import axios from 'axios'
+import router from '../../router'
 
 export default {
     setup() {
@@ -25,6 +28,10 @@ export default {
                 url: "",
                 method: "post"
             })
+        },
+        
+        moveToProfileEdit() {
+            router.push("/profileedit")
         }
     }
 }

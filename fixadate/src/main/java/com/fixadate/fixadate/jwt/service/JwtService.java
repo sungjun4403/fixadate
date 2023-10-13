@@ -152,5 +152,10 @@ public class JwtService {
 //        }
         return true;
     }
+
+    public String extractOauthPlatform(HttpServletRequest request) {
+        return request.getHeader("oauthPlatform");
+    }
+
 }
 

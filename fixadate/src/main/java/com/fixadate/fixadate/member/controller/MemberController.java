@@ -23,14 +23,17 @@ public class MemberController {
     private final AuthService authService;
 
     //VIEW ONE without authorities
-    @GetMapping("/member/{memberId}")
-    public MemberResponse get(@PathVariable Long memberId) {
-        return memberService.get(memberId);
+    @GetMapping("/member/{oauthId}")
+    public MemberResponse get(@PathVariable String oauthId) {
+        return memberService.get(oauthId);
     }
 
     //VIEW ONE with authorities
     @GetMapping("/member/withtoken")
     public MemberResponse get(HttpServletRequest request) {
+        if (SecurityUtil.getLoginedUserOauthId().equals()) {
+
+        }
         String accessToken = request.getHeader("Authorization").split(" ")[1];
         String oauthPlatform= request.getHeader("oauthPlatform");
         return memberService.getByAccessToken(accessToken, oauthPlatform);

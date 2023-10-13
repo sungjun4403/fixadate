@@ -62,8 +62,6 @@ export default {
 
     mounted() {
         this.fillInfo()
-        console.log(this.AccessToken)
-        console.log(this.RefreshToken)
     },
 
     methods: {
@@ -120,7 +118,6 @@ export default {
                     refreshToken: this.RefreshToken
                 }
             }).then((response) => {
-                console.log(response)
                 if (response.status == 200) {
                     router.push("/redirect")    
                 }

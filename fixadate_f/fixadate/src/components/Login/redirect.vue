@@ -9,12 +9,7 @@ import axios from 'axios'
 import router from '../../router'
 export default {
     mounted() {
-        axios({
-                url: "http://localhost:8080/getkakaologinurl",
-                method: "get"
-            }).then((response) => {
-                document.location.href = response.data
-            })   
+        this.saveAuthentication();
     },
     methods: {
         saveAuthentication() {
@@ -28,8 +23,12 @@ export default {
             }).then((response) => {
                 console.log(response)
                 if (response.status == 200) {
-                    router.push("/home")
+                    router.push("/")
                 }
+                else {
+                    router.push("/404")
+                }
+                
             })
         }
     }
