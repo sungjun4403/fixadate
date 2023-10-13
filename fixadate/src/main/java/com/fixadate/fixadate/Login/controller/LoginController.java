@@ -39,8 +39,8 @@ public class LoginController {
     @Value("${naver.client.redirect_uri}")
     private String naverRedirectUrl;
 
-    //login procedure { oauth login -> get code -> get token -> get info -> ifuserexists -> (create) -> put token on header }
-    //info required for sign up -
+    // login procedure { oauth login -> get code -> get token -> get info -> ifuserexists -> (create) -> put token on header }
+    // info required for sign up -
     //  name, refreshToken, oauthId, oauthPlatform, profileImg, nickname, birth, gender, profession, signatureColor
     //  이성준, cddkhwjkej212, 212312, Naver, https://s3bucket/,  비싼 크롸쌍, 040521, true, univ student, rgba(0, 0, 0, 0)
     //  editable data (user): profileImg, nickname, profession, signatureColor
