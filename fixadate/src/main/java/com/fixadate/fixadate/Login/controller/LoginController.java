@@ -8,11 +8,14 @@ import com.fixadate.fixadate.Login.dto.naver.NaverInfoResponse;
 import com.fixadate.fixadate.Login.dto.naver.NaverTokenResponse;
 import com.fixadate.fixadate.Login.service.LoginService;
 import com.fixadate.fixadate.member.service.MemberService;
+import jakarta.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.HttpSession;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import lombok.extern.slf4j.XSlf4j;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.logging.Level;
@@ -107,11 +110,20 @@ public class LoginController {
         return "";
     }
 
-    @GetMapping("/logout")
-    public void logout(HttpSecurity http) throws Exception{
-        http.logout()
-                .deleteCookies("JSESSIONID")
-                .invalidateHttpSession(true);
-    }
+//    @GetMapping("/logout")
+//    public void logout(HttpSecurity http) throws Exception{
+//
+////                .deleteCookies("no")
+//
+//
+//        http.logout()
+//                .logoutUrl("/logout")   // 로그아웃 처리 URL (= form action url)
+//                .invalidateHttpSession(true)
+//                .logoutSuccessHandler((request, response, authentication) -> {
+//                    response.setStatus(HttpServletResponse.SC_OK);
+//                }) // 로그아웃 성공 핸들러
+//                .deleteCookies("remember-me"); // 로그아웃 후 삭제할 쿠키 지정
+//        SecurityContextHolder.clearContext();
+//    }
 }
 
