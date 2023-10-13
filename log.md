@@ -359,4 +359,29 @@ public static String getLoginedUserGitId() {
 ~~~
 
 - 위 코드의 작동원리를 모르겠음. spring security를 사용하는 이유라고도 볼 수 있는 중요한 기능이라는데 이해가 안돼서 구현이 어려움. 몰라몰라
+- 아 이제 이해함
 
+<br/>
+  
+* * * *
+
+<h3>16. jwt request filter 대충 사용할 수 있을 정도로 완성 </h3>
+2023/09/30 ~ 2023/10/08<br/>
+
+- request에서 oauthPlatform, accessToken분리 후 oauthPlatform 케이스에 따라 각 링크 (api.kakao, api.google, etc.)로 토큰을 검증 받음 (일단 카카오만)
+- 최초 회원가입시에는 유저가 생성되지 않은 상태이기 때문에 (유저를 생성하는 단계이기 때문에) SecurityContextHolder.getContext()가 작동하지 않음 member를 db에서 찾은 후 saveAuthentication하도록 했음
+- jwtRequestFilter의 메서드를 퍼블릭으로 전환하는 것보다 불편해도 로그인 후 한번 더 접속해 고의적으로 saveAuthentication()만을 목적으로 하는 페이지를 생성함.
+- 그리고 어쩌다보니 SecurityContextHolder.Authentication의 userDetail클래스의 유저와 pw가 unique항목이라 같은 유저가 두번 데이터베이스에 저장되는 것을 막을 수 있게 됨(물론 추후 orm으로 unique 설정 예정)
+- 그리고 뭐 이것저것 함 vue를 최종적으로 사용할 것은 아니지만 현재 api가 정상적으로 작동하는지 확인하기 위해서 페이지를 만들기에는 vue가 제일 쉬운것 같아서 일단 계속 이걸로 만들고 있음. ProfileEdit 페이지 만들어서 name, nickname, birth, gender, profession 등 항목들 수신 받음. 기본 폰트도 roboto regular 400으로 수정함. 뭐 text-align:center 외에도 이것저것,,, 그래도 가끔 보게 될거니까 볼만하게 다듬음
+- 로그아웃 기능 구현에서 막힘. localhost:8080/logout으로 로그아웃하려했는데 spring security의 기본 로그아웃에 하이재킹 당해서 로그아웃 성공 후 리다이렉트가 자동으로 되버림 localhost:8080/login?logout으로 가버림...
+- 해결하려고 <code>response.setStatus(HttpServletResponse.SC_OK);</code> 를 했는데 안됨,,,
+- 아무튼 spring security logout의 중요한 몇가지를 뽑으라면 1. delete cookies, 2. invalidate session, 3. logoutSuccessHandler (callback uri), 4. SecurityContextHolder.clearContext()
+- 아맞다 그리고 Adate 프론트 페이지도 조금 구현함
+- 그리고 앞으로 해야되는게
+ - logout 
+ - update refreshToken
+ - reissue accessToken
+ - sendAccessTokenAndRefreshToken
+ - setAccessTokenHeader
+ - setRefreshTokenHeader
+ - jwtExceptionFilter
