@@ -1,11 +1,14 @@
 package com.fixadate.fixadate.global.config;
 
+import com.fixadate.fixadate.Login.CustomLogoutHandler;
 import com.fixadate.fixadate.jwt.CustomAuthenticationEntryPoint;
 import com.fixadate.fixadate.jwt.filter.JwtExceptionFilter;
 import com.fixadate.fixadate.jwt.filter.JwtRequestFilter;
 import com.fixadate.fixadate.jwt.service.JwtService;
 import com.fixadate.fixadate.member.repository.MemberRepository;
+import jakarta.servlet.http.HttpServletResponse;
 import lombok.AllArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -15,6 +18,7 @@ import org.springframework.security.config.annotation.web.configuration.EnableWe
 import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
+import org.springframework.security.web.authentication.logout.SecurityContextLogoutHandler;
 import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 
 @Configuration
@@ -23,8 +27,8 @@ import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 public class SecurityConfig extends SecurityConfigurerAdapter {
     private final MemberRepository memberRepository;
     private final JwtService jwtService;
-
     private final String NO_CHECK_URL = "/login";
+
 
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
@@ -35,10 +39,16 @@ public class SecurityConfig extends SecurityConfigurerAdapter {
         http.sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS);
         http.formLogin().disable();
         http.httpBasic().disable();
-//        http.logout()
-//                .logoutUrl("/logout")
-//                .deleteCookies("JSESSIONID")
-//                .invalidateHttpSession(true);
+        http.logout()
+                .logoutUrl("/logout")
+                .deleteCookies("JSESSIONID")
+                .invalidateHttpSession(true)
+                .clearAuthentication(true)
+                .addLogoutHandler(customLogoutHandler())
+                .logoutSuccessHandler((request, response, authentication) -> {
+                    response.setStatus(HttpServletResponse.SC_OK);
+                })
+                .permitAll();
         http.exceptionHandling().authenticationEntryPoint(new CustomAuthenticationEntryPoint());
 
 
@@ -58,6 +68,16 @@ public class SecurityConfig extends SecurityConfigurerAdapter {
     public JwtExceptionFilter jwtExceptionFilter() {
         JwtExceptionFilter jwtExceptionFilter = new JwtExceptionFilter();
         return jwtExceptionFilter;
+    }
+
+    @Bean
+    public CustomLogoutHandler customLogoutHandler() {
+        return new CustomLogoutHandler();
+    }
+
+    @Bean
+    public SecurityContextLogoutHandler securityContextLogoutHandler() {
+        return new SecurityContextLogoutHandler();
     }
 
 }

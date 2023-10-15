@@ -10,6 +10,9 @@ import com.fixadate.fixadate.member.dto.MemberResponse;
 import com.fixadate.fixadate.member.service.MemberService;
 import jakarta.servlet.http.HttpServletRequest;
 import lombok.RequiredArgsConstructor;
+import org.springframework.security.core.context.SecurityContext;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.context.SecurityContextImpl;
 import org.springframework.web.bind.annotation.*;
 
 // SIGN UP FLOW CHART
@@ -34,6 +37,10 @@ public class MemberController {
     @GetMapping("/member/withtoken")
     public MemberResponse get(HttpServletRequest request) {
         String oauthId = jwtService.extractOauthId(jwtService.extractAccessToken(request).orElseThrow(), jwtService.extractOauthPlatform(request)).orElseThrow();
+        System.out.println("SECURITY CONTEXT HOLDER");
+        System.out.println(SecurityContextHolder.getContext());
+        System.out.println(SecurityContextHolder.getContext().getAuthentication());
+
 
         if (SecurityUtil.getLoginedUserOauthId().equals(oauthId)) {
             String accessToken = request.getHeader("Authorization").split(" ")[1];
