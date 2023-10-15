@@ -109,12 +109,5 @@ public class LoginController {
 
         return "";
     }
-
-//    @GetMapping("/logout")
-//    public void logout() {
-//        System.out.println("LOGOUT");
-//        System.out.println("LOGOUT");
-//        SecurityContextHolder.clearContext();
-//    }
 }
 

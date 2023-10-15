@@ -10,6 +10,7 @@ import com.fixadate.fixadate.member.dto.MemberResponse;
 import com.fixadate.fixadate.member.service.MemberService;
 import jakarta.servlet.http.HttpServletRequest;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.core.context.SecurityContext;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.context.SecurityContextImpl;
@@ -22,6 +23,7 @@ import org.springframework.web.bind.annotation.*;
 
 @RequiredArgsConstructor
 @RestController
+@Slf4j
 public class MemberController {
     private final MemberService memberService;
     private final AuthService authService;
@@ -37,11 +39,8 @@ public class MemberController {
     @GetMapping("/member/withtoken")
     public MemberResponse get(HttpServletRequest request) {
         String oauthId = jwtService.extractOauthId(jwtService.extractAccessToken(request).orElseThrow(), jwtService.extractOauthPlatform(request)).orElseThrow();
-        System.out.println("SECURITY CONTEXT HOLDER");
-        System.out.println(SecurityContextHolder.getContext());
         System.out.println(SecurityContextHolder.getContext().getAuthentication());
-
-
+//        SecurityContextHolder.clearContext();
         if (SecurityUtil.getLoginedUserOauthId().equals(oauthId)) {
             String accessToken = request.getHeader("Authorization").split(" ")[1];
             String oauthPlatform= request.getHeader("oauthPlatform");

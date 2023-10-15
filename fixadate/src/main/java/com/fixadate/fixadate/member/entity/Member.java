@@ -27,6 +27,7 @@ public class Member extends BaseTimeEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "memberId")
     private Long id;
+    @Column(unique = true, nullable = false)
     private String oauthId;
     private String oauthPlatform;
     private String refreshToken;

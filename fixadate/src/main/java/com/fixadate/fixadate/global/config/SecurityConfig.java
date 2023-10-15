@@ -8,8 +8,6 @@ import com.fixadate.fixadate.jwt.service.JwtService;
 import com.fixadate.fixadate.member.repository.MemberRepository;
 import jakarta.servlet.http.HttpServletResponse;
 import lombok.AllArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.SecurityConfigurerAdapter;
@@ -19,7 +17,6 @@ import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 import org.springframework.security.web.authentication.logout.SecurityContextLogoutHandler;
-import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 
 @Configuration
 @EnableWebSecurity
@@ -41,10 +38,12 @@ public class SecurityConfig extends SecurityConfigurerAdapter {
         http.httpBasic().disable();
         http.logout()
                 .logoutUrl("/logout")
+                .l
                 .deleteCookies("JSESSIONID")
                 .invalidateHttpSession(true)
                 .clearAuthentication(true)
                 .addLogoutHandler(customLogoutHandler())
+                .addLogoutHandler(securityContextLogoutHandler())
                 .logoutSuccessHandler((request, response, authentication) -> {
                     response.setStatus(HttpServletResponse.SC_OK);
                 })
@@ -71,13 +70,13 @@ public class SecurityConfig extends SecurityConfigurerAdapter {
     }
 
     @Bean
-    public CustomLogoutHandler customLogoutHandler() {
-        return new CustomLogoutHandler();
+    public SecurityContextLogoutHandler securityContextLogoutHandler() {
+        return new SecurityContextLogoutHandler();
     }
 
     @Bean
-    public SecurityContextLogoutHandler securityContextLogoutHandler() {
-        return new SecurityContextLogoutHandler();
+    public CustomLogoutHandler customLogoutHandler() {
+        return new CustomLogoutHandler();
     }
 
 }

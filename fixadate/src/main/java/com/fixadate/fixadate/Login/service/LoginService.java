@@ -9,10 +9,14 @@ import com.fixadate.fixadate.Login.dto.kakao.KakaoTokenRequest;
 import com.fixadate.fixadate.Login.dto.kakao.KakaoTokenResponse;
 import com.fixadate.fixadate.Login.dto.naver.NaverInfoResponse;
 import com.fixadate.fixadate.Login.dto.naver.NaverTokenResponse;
+import com.fixadate.fixadate.global.utils.SecurityUtil;
+import com.fixadate.fixadate.jwt.service.JwtService;
 import com.fixadate.fixadate.member.service.MemberService;
+import jakarta.servlet.http.HttpServletRequest;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.*;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.LinkedMultiValueMap;
@@ -45,6 +49,8 @@ public class LoginService {
     private String kakaoRedirectUri;
 
     private final MemberService memberService;
+    private final JwtService jwtService;
+
 
     RestTemplate restTemplate = new RestTemplate();
 
@@ -169,5 +175,17 @@ public class LoginService {
     }
     // ============== packing up for memberService ==============
 
+    public void logout(HttpServletRequest request) {
+        String oauthId = jwtService.extractOauthId(jwtService.extractAccessToken(request).orElseThrow(), jwtService.extractOauthPlatform(request)).orElseThrow();
 
+        if (SecurityUtil.getLoginedUserOauthId().equals(oauthId)) { //verified
+            System.out.println(SecurityContextHolder.getContext().getAuthentication());
+            SecurityContextHolder.clearContext();
+            System.out.println(SecurityContextHolder.getContext().getAuthentication());
+        }
+        else { // anonymous user trying to logout
+
+        }
+
+    }
 }

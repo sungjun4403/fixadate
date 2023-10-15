@@ -112,6 +112,5 @@ public class MemberService {
         MemberResponse memberResponse = MemberResponse.builder().build();
 
         return memberResponse;
-
     }
 }
