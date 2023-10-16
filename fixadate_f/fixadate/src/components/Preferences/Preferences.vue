@@ -34,6 +34,12 @@ export default {
                 //     router.push("/404")
                 // }
             })
+            axios({
+                url: "http://localhost:8080/sslogout",
+                method: "get",
+            }).then((response) => {
+                console.log(response)
+            })
         },
         
         moveToProfileEdit() {

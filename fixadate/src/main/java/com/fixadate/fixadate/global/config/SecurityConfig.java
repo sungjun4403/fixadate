@@ -38,7 +38,6 @@ public class SecurityConfig extends SecurityConfigurerAdapter {
         http.httpBasic().disable();
         http.logout()
                 .logoutUrl("/logout")
-                .l
                 .deleteCookies("JSESSIONID")
                 .invalidateHttpSession(true)
                 .clearAuthentication(true)

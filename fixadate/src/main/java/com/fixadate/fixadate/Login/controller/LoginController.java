@@ -8,6 +8,7 @@ import com.fixadate.fixadate.Login.dto.naver.NaverInfoResponse;
 import com.fixadate.fixadate.Login.dto.naver.NaverTokenResponse;
 import com.fixadate.fixadate.Login.service.LoginService;
 import com.fixadate.fixadate.member.service.MemberService;
+import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
 import lombok.RequiredArgsConstructor;
@@ -108,6 +109,11 @@ public class LoginController {
         @RequestParam(value = "ifRefreshToken") String ifRefreshToken) {
 
         return "";
+    }
+
+    @GetMapping("/sslogout")
+    public void logout(HttpServletRequest request) {
+        loginService.logout(request);
     }
 }
 
