@@ -184,7 +184,7 @@ public class LoginService {
             System.out.println(SecurityContextHolder.getContext().getAuthentication());
         }
         else { // anonymous user trying to logout
-
+            throw new IllegalStateException("NON USER TRYING TO LOGOUT");
         }
 
     }
