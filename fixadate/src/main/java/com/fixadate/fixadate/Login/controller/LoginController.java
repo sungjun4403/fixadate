@@ -103,14 +103,7 @@ public class LoginController {
         return loginService.kakaoGetUserInfo(kakaoTokenResponse);
     }
 
-    @GetMapping("/api/token/issue/{platform}")
-    public String issueToken(@PathVariable String platform,
-        @RequestParam(value = "ifAccessToken") String ifAccessToken,
-        @RequestParam(value = "ifRefreshToken") String ifRefreshToken) {
-
-        return "";
-    }
-
+    // ==============logout methods==============
     @GetMapping("/sslogout")
     public void logout(HttpServletRequest request) {
         loginService.logout(request);
