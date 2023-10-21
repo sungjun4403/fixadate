@@ -401,7 +401,7 @@ public static String getLoginedUserGitId() {
 - gitbook으로 작성함. 가끔 쓸 듯. 쉽게 작성하기 좋음.
 - logout 프로세스 전반을 구현하는데 이런저런 이슈가 있었음. http://localhost:8080/logout으로 요청을 보내서 백에서 받으려 했으나 /logout은 spring security에서 default logout url 지정되어있었다... 근데 알아보니 SecurityFilterChain에서 HttpSecurity 제공 logout 기능이 꽤나 괜찮아서 그냥 사용하기로 했다.
   
-'''java
+~~~java
 @Bean
 public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
     http.cors(); // deprecated for spring security 7.0 (available for now)
@@ -427,7 +427,7 @@ public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
 
     return http.build();
 }
-'''
+~~~
 
 - deleteCookies, invalidateHttpSession, clearAuthentication, LogoutHandler, etc... 쓸만한 기능들이다
 - 근데 customLogoutHandler를 bean으로 등록해서 원하는 메서드를 실행하기 어려웠다. bean 생성 시에 생성자에 들어갈 것들이 너무 많았음. 그래서 로그아웃시에 프론트에서 요청을 두개를 주는걸로 함 (/logout, /sslogout)
