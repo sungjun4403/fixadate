@@ -1,6 +1,7 @@
 package com.fixadate.fixadate.Login.service;
 
 import com.fixadate.fixadate.Login.dto.kakao.KakaoTokenIfValid;
+import com.fixadate.fixadate.Login.dto.naver.NaverTokenIfValid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
@@ -24,6 +25,15 @@ public class AuthService {
         return kakaoTokenIfValid.getBody();
     }
 
-//    public GoogleTokenIfValid
+    //    public GoogleTokenIfValid
+    public NaverTokenIfValid NaverTokenIfValid(String accessToken) {
+        //mothafuxking naver does not provide independent token validation api. Thereby, NaverTokenResponse collects partial data from user profile view
+        RestTemplate restTemplate = new RestTemplate();
 
+        HttpHeaders headers = new HttpHeaders();
+        headers.set("Authorization", "Bearer "+ accessToken);
+        HttpEntity<Object> httpEntity = new HttpEntity<>(headers);
+        ResponseEntity<NaverTokenIfValid> naverTokenIfValid = restTemplate.exchange("https://kapi.kakao.com/v1/user/access_token_info", HttpMethod.GET, httpEntity, NaverTokenIfValid.class);
+        return naverTokenIfValid.getBody();
+    }
 }

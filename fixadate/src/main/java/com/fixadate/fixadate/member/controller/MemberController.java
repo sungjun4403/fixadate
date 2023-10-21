@@ -1,6 +1,7 @@
 package com.fixadate.fixadate.member.controller;
 
 import com.fixadate.fixadate.Login.dto.kakao.KakaoTokenIfValid;
+import com.fixadate.fixadate.Login.dto.naver.NaverTokenIfValid;
 import com.fixadate.fixadate.Login.service.AuthService;
 import com.fixadate.fixadate.global.utils.SecurityUtil;
 import com.fixadate.fixadate.jwt.service.JwtService;
@@ -68,6 +69,8 @@ public class MemberController {
                 oauthIdFromToken = kakaoTokenIfValid.getId();
             case "google":
             case "naver":
+                NaverTokenIfValid naverTokenIfValid = authService.NaverTokenIfValid(accessToken);
+//                oauthIdFromToken = naverTokenIfValid
             case "apple":
         }
 

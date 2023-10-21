@@ -23,11 +23,12 @@ export default {
                 method: "get"
             }).then((response) => {
                 console.log(response.data)
+                console.log(response.data.naverTokenResponse)
                 var boolGender
-                if (response.data.kakao_account.gender == "male") {
+                if (response.data.response.gender == "M") {
                     boolGender = true
                 }
-                else if (response.data.kakao_account.gender == "female") {
+                else if (response.data.response.gender == "F") {
                     boolGender = false
                 }
                 router.push({
@@ -39,8 +40,8 @@ export default {
                         gender: boolGender,
                         profileImg: response.data.response.profile_image,
                         birth: response.data.response.birthday,
-                        AccessToken: response.data.kakaoTokenResponse.access_token,
-                        RefreshToken: response.data.kakaoTokenResponse.refresh_token
+                        AccessToken: response.data.naverTokenResponse.access_token,
+                        RefreshToken: response.data.naverTokenResponse.refresh_token
                     }
                 })
             })
