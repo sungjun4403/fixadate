@@ -66,17 +66,17 @@ export default {
 
     methods: {
         fillInfo() { //Oauth로 받아온 정보 input tag에 미리 채워넣는 메서드
-        
+            //name, gender, birth
             document.getElementById("name").value = this.name
-            document.getElementById("nickname").value = ""
-            if (this.gender == "male") {
+            if (this.gender == "true") {      //if male
                 document.getElementById("male").checked = true
             }
-            if (this.gender == "female") {
+            if (this.gender == "false") {     //if female
                 document.getElementById("female").checked = true
             }
             // document.getElementById("profileImg").value = this.gender
             document.getElementById("birth").value = this.birth
+            document.getElementById("profileImg").value = this.profileImg
         },
 
         getRandNick() { //백에서 랜덤 닉네임 받아오기

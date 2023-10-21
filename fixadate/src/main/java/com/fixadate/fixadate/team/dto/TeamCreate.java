@@ -15,5 +15,5 @@ public class TeamCreate {
     private String name;
     private String groupColor;
     private String description;
-    private Set<Member> members = new HashSet<>();
+//    private Set<Member> members = new HashSet<>();
 }

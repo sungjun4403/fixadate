@@ -24,20 +24,25 @@ export default {
                 url: "http://localhost:8080/api/kakao/login?" + code,
                 method: "get"
             }).then((response) => {
-                console.log(response.data)
-                console.log(response.data.kakaoTokenResponse.access_token)
+                var boolGender
+                console.log(response.data.kakao_account.gender)
+                if (response.data.kakao_account.gender == "male") {
+                    boolGender = true
+                }
+                else if (response.data.kakao_account.gender == "female") {
+                    boolGender = false
+                }
                 router.push({
                     name: "InfoInput",
                     params: {
                         oauthPlatform: "kakao",
                         oauthId: response.data.id,
                         name: null,
-                        gender: response.data.kakao_account.gender,
+                        gender: boolGender,
                         profileImg: response.data.properties.profile_image,
                         birth: response.data.kakao_account.birthday,
                         AccessToken: response.data.kakaoTokenResponse.access_token,
                         RefreshToken: response.data.kakaoTokenResponse.refresh_token
-                        
                     }
                 })
 

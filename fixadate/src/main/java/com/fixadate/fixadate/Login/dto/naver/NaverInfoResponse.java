@@ -10,5 +10,5 @@ public class NaverInfoResponse {
     private String resultcode;
     private String message;
     private NaverInfo response;
-
+    private NaverTokenResponse naverTokenResponse;
 }

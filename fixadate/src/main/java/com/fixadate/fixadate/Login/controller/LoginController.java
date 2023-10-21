@@ -4,6 +4,7 @@ import com.fixadate.fixadate.Login.dto.google.GoogleInfResponse;
 import com.fixadate.fixadate.Login.dto.google.GoogleResponse;
 import com.fixadate.fixadate.Login.dto.kakao.KakaoInfoResponse;
 import com.fixadate.fixadate.Login.dto.kakao.KakaoTokenResponse;
+import com.fixadate.fixadate.Login.dto.naver.NaverInfo;
 import com.fixadate.fixadate.Login.dto.naver.NaverInfoResponse;
 import com.fixadate.fixadate.Login.dto.naver.NaverTokenResponse;
 import com.fixadate.fixadate.Login.service.LoginService;
@@ -48,7 +49,6 @@ public class LoginController {
     //  editable data (server): refreshToken
     //  static data:  name, gender, birth, oauthId, oauthPlatform, birth
 
-
     // ==============getloginurl methods==============
     @GetMapping("/getgoogleloginurl")
     public String loginUrlGoogle() {
@@ -86,14 +86,10 @@ public class LoginController {
     }
 
     @GetMapping("/api/naver/login")
-    public String afterLoginNaver(@RequestParam(value = "code") String authCode) {
+    public NaverInfoResponse afterLoginNaver(@RequestParam(value = "code") String authCode) {
         NaverTokenResponse naverTokenResponse = loginService.naverIssueTokens(authCode);
 
-        NaverInfoResponse naverInfoResponse = loginService.naverGetUserInfo(naverTokenResponse);
-
-        System.out.println(naverInfoResponse.getResponse());
-
-        return "";
+        return loginService.naverGetUserInfo(naverTokenResponse);
     }
 
     @GetMapping("/api/kakao/login")

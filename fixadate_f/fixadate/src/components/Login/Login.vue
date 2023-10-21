@@ -66,6 +66,7 @@ export default {
     .oauthButton {
         width: 150px;
         height: 35px;
+        border-radius: 3.9px;
     }
 
     #Login {

@@ -14,6 +14,7 @@ import com.fixadate.fixadate.jwt.service.JwtService;
 import com.fixadate.fixadate.member.service.MemberService;
 import jakarta.servlet.http.HttpServletRequest;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.*;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -30,6 +31,7 @@ import java.util.Map;
 @Service
 @Transactional
 @RequiredArgsConstructor
+@Slf4j
 public class LoginService {
     @Value("${google.client.id}")
     private String googleClientId;
@@ -155,7 +157,7 @@ public class LoginService {
                 entity,
                 NaverInfoResponse.class
         );
-
+        naverInfoResponse.getBody().setNaverTokenResponse(naverTokenResponse);
         return naverInfoResponse.getBody();
     }
 
@@ -179,9 +181,9 @@ public class LoginService {
         String oauthId = jwtService.extractOauthId(jwtService.extractAccessToken(request).orElseThrow(), jwtService.extractOauthPlatform(request)).orElseThrow();
 
         if (SecurityUtil.getLoginedUserOauthId().equals(oauthId)) { //verified
-            System.out.println(SecurityContextHolder.getContext().getAuthentication());
+            System.out.println(SecurityContextHolder.getContext().getAuthentication()); //before logout
             SecurityContextHolder.clearContext();
-            System.out.println(SecurityContextHolder.getContext().getAuthentication());
+            System.out.println(SecurityContextHolder.getContext().getAuthentication()); //after logout
         }
         else { // anonymous user trying to logout
             throw new IllegalStateException("NON USER TRYING TO LOGOUT");

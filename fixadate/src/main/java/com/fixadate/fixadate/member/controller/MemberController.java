@@ -43,7 +43,7 @@ public class MemberController {
 //        SecurityContextHolder.clearContext();
         if (SecurityUtil.getLoginedUserOauthId().equals(oauthId)) {
             String accessToken = request.getHeader("Authorization").split(" ")[1];
-            String oauthPlatform= request.getHeader("oauthPlatform");
+            String oauthPlatform= request.getHeader("oauthPlEatform");
             return memberService.get(oauthId);
         }
         else {
@@ -98,3 +98,4 @@ public class MemberController {
         return memberService.getRandNick();
     }
 }
+
