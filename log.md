@@ -387,3 +387,45 @@ public static String getLoginedUserGitId() {
  - jwtExceptionFilter
  - Adate
 - 그래서 현재는 <code>String oauthId = jwtService.extractOauthId(jwtService.extractAccessToken(request).orElseThrow(), jwtService.extractOauthPlatform(request)).orElseThrow();</code>
+
+<br/>
+  
+* * * *
+
+<h3>18. logout, refactoring</h3>
+2023/10/08 ~ 2023/10/21<br/>
+
+- shtt. logout 관련 개발 로그 작성 한 줄 알았는데 꿈이였고.
+- 팀원 공유용 프로젝트 문서 작성하느라 개발을 잠깐 못했음
+<a href="https://fixadate.gitbook.io/fixadate-api-document/">⚒️about Fixadate</a>
+- gitbook으로 작성함. 가끔 쓸 듯. 쉽게 작성하기 좋음.
+- logout 프로세스 전반을 구현하는데 이런저런 이슈가 있었음. http://localhost:8080/logout으로 요청을 보내서 백에서 받으려 했으나 /logout은 spring security에서 default logout url 지정되어있었다... 근데 알아보니 SecurityFilterChain에서 HttpSecurity 제공 logout 기능이 꽤나 괜찮아서 그냥 사용하기로 했다.
+'''java
+@Bean
+public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
+    http.cors(); // deprecated for spring security 7.0 (available for now)
+    http.authorizeHttpRequests().anyRequest().permitAll();
+    http.headers(headers -> headers.frameOptions().disable());
+    http.csrf().disable();
+    http.sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS);
+    http.formLogin().disable();
+    http.httpBasic().disable();
+    http.logout()
+            .logoutUrl("/logout")
+            .deleteCookies("JSESSIONID")
+            .invalidateHttpSession(true)
+            .clearAuthentication(true)
+            .addLogoutHandler(customLogoutHandler())
+            .addLogoutHandler(securityContextLogoutHandler())
+            .logoutSuccessHandler((request, response, authentication) -> {
+                response.setStatus(HttpServletResponse.SC_OK);
+            })
+            .permitAll();
+    http.exceptionHandling().authenticationEntryPoint(new CustomAuthenticationEntryPoint());
+    http.addFilterBefore(jwtRequestFilter(), UsernamePasswordAuthenticationFilter.class);
+
+    return http.build();
+}
+'''
+- deleteCookies, invalidateHttpSession, clearAuthentication, LogoutHandler, etc... 쓸만한 기능들이다
+- 근데 customLogoutHandler를 bean으로 등록할 
