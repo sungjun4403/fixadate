@@ -4,15 +4,12 @@ import com.fixadate.fixadate.Adate.entity.Adate;
 import com.fixadate.fixadate.global.entity.BaseTimeEntity;
 import com.fixadate.fixadate.member.dto.MemberEditor;
 import com.fixadate.fixadate.memberTeam.entity.MemberTeam;
-import com.fixadate.fixadate.team.entity.Team;
 import jakarta.persistence.*;
 import lombok.*;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.ArrayList;
-import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
 
 
 @Entity

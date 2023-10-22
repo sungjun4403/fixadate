@@ -63,6 +63,9 @@ public class MemberController {
         String oauthPlatform = request.getHeader("oauthPlatform");
         String oauthIdFromToken = null;
 
+        System.out.println(accessToken);
+        System.out.println(oauthPlatform);
+
         switch (oauthPlatform) {
             case "kakao":
                 KakaoTokenIfValid kakaoTokenIfValid = authService.KakaoTokenIfValid(accessToken);
@@ -70,7 +73,7 @@ public class MemberController {
             case "google":
             case "naver":
                 NaverTokenIfValid naverTokenIfValid = authService.NaverTokenIfValid(accessToken);
-//                oauthIdFromToken = naverTokenIfValid
+//                oauthIdFromToken = naverTokenIfValid.getResponse().getId();
             case "apple":
         }
 

@@ -48,8 +48,6 @@ public class SecurityConfig extends SecurityConfigurerAdapter {
                 })
                 .permitAll();
         http.exceptionHandling().authenticationEntryPoint(new CustomAuthenticationEntryPoint());
-
-
         http.addFilterBefore(jwtRequestFilter(), UsernamePasswordAuthenticationFilter.class);
 
         return http.build();

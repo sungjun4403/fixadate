@@ -58,7 +58,6 @@ kakao:
 #        pw:
         redirect_uri: "http://localhost:3000/kakaoafterlogin"
 
-
 #apple:
 #    client:
 #        id:
@@ -70,7 +69,6 @@ randNick:
 
 jwt:
 #    secret: 2314567890789654367897087689578467356425376847950865794638497
-
     access:
 #        expiration: 3600
         header: Authorization
