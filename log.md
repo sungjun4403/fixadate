@@ -387,3 +387,49 @@ public static String getLoginedUserGitId() {
  - jwtExceptionFilter
  - Adate
 - 그래서 현재는 <code>String oauthId = jwtService.extractOauthId(jwtService.extractAccessToken(request).orElseThrow(), jwtService.extractOauthPlatform(request)).orElseThrow();</code>
+
+<br/>
+  
+* * * *
+
+<h3>18. logout, refactoring</h3>
+2023/10/08 ~ 2023/10/21<br/>
+
+- shtt. logout 관련 개발 로그 작성 한 줄 알았는데 꿈이였고.
+- 팀원 공유용 프로젝트 문서 작성하느라 개발을 잠깐 못했음
+<a href="https://fixadate.gitbook.io/fixadate-api-document/">⚒️about Fixadate</a>
+- gitbook으로 작성함. 가끔 쓸 듯. 쉽게 작성하기 좋음.
+- logout 프로세스 전반을 구현하는데 이런저런 이슈가 있었음. http://localhost:8080/logout으로 요청을 보내서 백에서 받으려 했으나 /logout은 spring security에서 default logout url 지정되어있었다... 근데 알아보니 SecurityFilterChain에서 HttpSecurity 제공 logout 기능이 꽤나 괜찮아서 그냥 사용하기로 했다.
+  
+~~~java
+@Bean
+public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
+    http.cors(); // deprecated for spring security 7.0 (available for now)
+    http.authorizeHttpRequests().anyRequest().permitAll();
+    http.headers(headers -> headers.frameOptions().disable());
+    http.csrf().disable();
+    http.sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS);
+    http.formLogin().disable();
+    http.httpBasic().disable();
+    http.logout()
+            .logoutUrl("/logout")
+            .deleteCookies("JSESSIONID")
+            .invalidateHttpSession(true)
+            .clearAuthentication(true)
+            .addLogoutHandler(customLogoutHandler())
+            .addLogoutHandler(securityContextLogoutHandler())
+            .logoutSuccessHandler((request, response, authentication) -> {
+                response.setStatus(HttpServletResponse.SC_OK);
+            })
+            .permitAll();
+    http.exceptionHandling().authenticationEntryPoint(new CustomAuthenticationEntryPoint());
+    http.addFilterBefore(jwtRequestFilter(), UsernamePasswordAuthenticationFilter.class);
+
+    return http.build();
+}
+~~~
+
+- deleteCookies, invalidateHttpSession, clearAuthentication, LogoutHandler, etc... 쓸만한 기능들이다
+- 근데 customLogoutHandler를 bean으로 등록해서 원하는 메서드를 실행하기 어려웠다. bean 생성 시에 생성자에 들어갈 것들이 너무 많았음. 그래서 로그아웃시에 프론트에서 요청을 두개를 주는걸로 함 (/logout, /sslogout)
+- 서버사이드 로그아웃의 목적은 SecurityContextHolder.clearContext()인데, Context가 남아있는지 확인하는 과정에서 <code>SecurityContextHolder.getContext().getAuthentication();</code>가 null로 나오는 오류가 있다. 왜이러시는지 아직도 모르겠땅.
+- 프로젝트 문서하고 API 문서하고 둘 개로 나누어서 작성하고 있는데 생각하던 것 보다 코드가 상당히 중구난방하다. 리턴타입이 다르고, url 링크가 다르고, 어쩌구 저쩌구 대충 맘에 안든다는 뜻. 나는 이해하는데 코드 처음 보는 사람이 이해하기엔 좀 규칙이 부족하단 생각이 들었음. 아무튼 그래서 공사중임. 
